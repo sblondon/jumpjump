@@ -41,6 +41,6 @@ class Red(Player):
 
 class Blue(Player):
 
-    def __init__(self, y=300):
+    def __init__(self):
         super(Blue, self).__init__("gfx/person-blue.png", x=100)
 

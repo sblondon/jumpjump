@@ -19,7 +19,7 @@ def start():
     screen.blit(background, (0, 0))
 
     objects = []
-    ennemy = ennemies.Enneny()
+    ennemy = ennemies.Ennemy()
     objects.append(ennemy)
     red = players.Red()
     objects.append(red)

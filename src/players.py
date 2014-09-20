@@ -7,11 +7,8 @@ class Player(object):
     def __init__(self, image_path, x):
         self.image = pygame.image.load(image_path).convert_alpha()
         self.speed = [0, 0]
-        self.position = self.get_rect().move(x, 150)
+        self.position = self.image.get_rect().move(x, 150)
         self.move_requested = {"down": False, "up": False, "left": False, "right": False}
-
-    def get_rect(self):
-        return self.image.get_rect()
 
     def move(self):
         if self.move_requested["up"]:

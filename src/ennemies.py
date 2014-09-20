@@ -10,10 +10,7 @@ class Ennemy(object):
     def __init__(self):
         self.image = pygame.image.load("gfx/ennemy.png").convert_alpha()
         self.speed = [2, 2]
-        self.position = self.get_rect().move(250, 150)
-
-    def get_rect(self):
-        return self.image.get_rect()
+        self.position = self.image.get_rect().move(250, 150)
 
     def move(self):
         self.position = self.position.move(self.speed)

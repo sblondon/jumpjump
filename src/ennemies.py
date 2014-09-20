@@ -25,3 +25,6 @@ class Ennemy(object):
     def should_move(self):
         return True
 
+    def touch(self, player):
+        hitbox = self.position.inflate(-5, -5)
+        return hitbox.colliderect(player.position)

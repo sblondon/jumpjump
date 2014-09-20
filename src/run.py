@@ -57,6 +57,11 @@ def start():
             screen.blit(o.image, o.position)
         pygame.display.update()
 
+        if ennemy.touch(red):
+            print "red lost 1 life"
+        if ennemy.touch(blue):
+            print "blue lost 1 life"
+
         pygame.time.delay(10)
 
 

@@ -3,6 +3,8 @@
 import pygame.image
 import pygame.sprite
 
+import consts
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, image_path, x):
@@ -11,31 +13,45 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect().move(x, 150)
         self.mask = pygame.mask.from_surface(self.image)
         self.speed = [0, 0]
-        self.move_requested = {"down": False, "up": False, "left": False, "right": False}
+        self.move_requested = {"up": False, "left": False, "right": False}
+        
+        self.change_x = 0
+        self.change_y = 0
+
 
     def update(self):
-        if self.should_move():
-            self.move()
+        self.gravity_effect()
+        self.move()
 
     def move(self):
-        if self.move_requested["up"]:
-            self.speed[1] = -1
-        if self.move_requested["right"]:
-            self.speed[0] = 1
-        if self.move_requested["down"]:
-            self.speed[1] = 1
-        if self.move_requested["left"]:
-            self.speed[0] = -1
-
-        self.rect = self.rect.move(self.speed)
-        self.move_requested = {"down": False, "up": False, "left": False, "right": False}
-        self.speed = [0, 0]
+        self.rect.x += self.change_x
+        self.rect.y += self.change_y
 
     def move_enable(self, key):
-        self.move_requested[key] = True
+        if key == "left":
+            self.change_x = -1
+        elif key == "right":
+            self.change_x = 1
+        elif key == "up":
+            self.jump()
 
-    def should_move(self):
-        return any(self.move_requested.values())
+    def jump(self):
+        if self.rect.bottom >= consts.WINDOW_SIZE[1]:
+            self.change_y = -10
+
+    def stop(self):
+        self.change_x = 0
+
+    def gravity_effect(self):
+
+        if self.change_y == 0:
+            self.change_y = 1
+        else:
+            self.change_y += .35
+
+        if self.rect.y >= consts.WINDOW_SIZE[1] - self.rect.height and self.change_y >= 0:
+            self.change_y = 0
+            self.rect.y = consts.WINDOW_SIZE[1] - self.rect.height
 
 
 class Red(Player):

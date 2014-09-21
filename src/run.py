@@ -29,12 +29,10 @@ def start():
     player_actions = {
             pygame.K_UP: lambda : blue.move_enable("up"),
             pygame.K_RIGHT: lambda : blue.move_enable("right"),
-            pygame.K_DOWN: lambda : blue.move_enable("down"),
             pygame.K_LEFT: lambda : blue.move_enable("left"),
 
             pygame.K_z: lambda : red.move_enable("up"),
             pygame.K_d: lambda : red.move_enable("right"),
-            pygame.K_s: lambda : red.move_enable("down"),
             pygame.K_q: lambda : red.move_enable("left"),
             }
 
@@ -47,6 +45,16 @@ def start():
                     run = False
                 elif event.key in player_actions.keys():
                     player_actions.get(event.key)()
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT and blue.change_x < 0:
+                    blue.stop()
+                elif event.key == pygame.K_RIGHT and blue.change_x > 0:
+                    blue.stop()
+                if event.key == pygame.K_q and red.change_x < 0:
+                    red.stop()
+                elif event.key == pygame.K_d and red.change_x > 0:
+                    red.stop()
+
 
         for sprite in all_sprites:
             screen.blit(background, sprite.rect, sprite.rect)

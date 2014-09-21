@@ -26,8 +26,8 @@ class Ennemy(pygame.sprite.Sprite):
         if self.rect.top < 0 or self.rect.bottom > consts.WINDOW_SIZE[1]:
             self.speed[1] *= -1
 
-
     def touch(self, player):
         hitbox = self.rect.inflate(-5, -5)
-        return hitbox.colliderect(player.rect)
+        if hitbox.colliderect(player.rect):
+            return pygame.sprite.collide_mask(self, player)
 

@@ -38,9 +38,6 @@ def start():
             pygame.K_q: lambda : red.move_enable("left"),
             }
 
-    red_player_sprites = pygame.sprite.Group([red])
-    blue_player_sprites = pygame.sprite.Group([blue])
-
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

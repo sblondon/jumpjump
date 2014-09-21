@@ -18,13 +18,13 @@ def start():
     background = pygame.image.load("gfx/background.png").convert()
     screen.blit(background, (0, 0))
 
-    objects = []
+    all_sprites = []
     ennemy = ennemies.Ennemy()
-    objects.append(ennemy)
+    all_sprites.append(ennemy)
     red = players.Red()
-    objects.append(red)
+    all_sprites.append(red)
     blue = players.Blue()
-    objects.append(blue)
+    all_sprites.append(blue)
 
     player_actions = {
             pygame.K_UP: lambda : blue.move_enable("up"),
@@ -51,12 +51,12 @@ def start():
                 elif event.key in player_actions.keys():
                     player_actions.get(event.key)()
 
-        for o in objects:
-            screen.blit(background, o.position, o.position)
+        for sprite in all_sprites:
+            screen.blit(background, sprite.rect, sprite.rect)
 
-        for o in objects:
-            o.update()
-            screen.blit(o.image, o.position)
+        for sprite in all_sprites:
+            sprite.update()
+            screen.blit(sprite.image, sprite.rect)
         pygame.display.update()
 
         if ennemy.touch(red):

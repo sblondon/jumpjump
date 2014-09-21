@@ -27,22 +27,32 @@ def start():
     all_sprites.append(blue)
 
     player_actions = {
-            pygame.K_UP: lambda : blue.jump(),
-            pygame.K_RIGHT: lambda : blue.go_to_right(),
-            pygame.K_LEFT: lambda : blue.go_to_left(),
-
-            pygame.K_z: lambda : red.jump(),
-            pygame.K_d: lambda : red.go_to_right(),
-            pygame.K_q: lambda : red.go_to_left(),
+            pygame.K_UP: {
+                "start_action": blue.jump,
+                "stop_action": lambda: None,
+                },
+            pygame.K_RIGHT: {
+                "start_action": blue.go_to_right,
+                "stop_action": blue.stop_go_to_right,
+                },
+            pygame.K_LEFT: {
+                "start_action": blue.go_to_left,
+                "stop_action": blue.stop_go_to_left,
+                },
+            pygame.K_z: {
+                "start_action": red.jump,
+                "stop_action": lambda: None,
+                },
+            pygame.K_d: {
+                "start_action": red.go_to_right,
+                "stop_action": red.stop_go_to_right,
+                },
+            pygame.K_q: {
+                "start_action": red.go_to_left,
+                "stop_action": red.stop_go_to_left,
+                }
             }
 
-    player_stop_actions = {
-            pygame.K_RIGHT: lambda : blue.stop_go_to_right(),
-            pygame.K_LEFT: lambda : blue.stop_go_to_left(),
-
-            pygame.K_d: lambda : red.stop_go_to_right(),
-            pygame.K_q: lambda : red.stop_go_to_left(),
-            }
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -51,10 +61,10 @@ def start():
                 if event.key == pygame.K_ESCAPE:
                     run = False
                 elif event.key in player_actions.keys():
-                    player_actions[event.key]()
+                    player_actions[event.key]["start_action"]()
             elif event.type == pygame.KEYUP:
-                if event.key in player_stop_actions.keys():
-                    player_stop_actions[event.key]()
+                if event.key in player_actions.keys():
+                    player_actions[event.key]["stop_action"]()
 
 
         for sprite in all_sprites:

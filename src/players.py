@@ -12,8 +12,6 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load(image_path).convert_alpha()
         self.rect = self.image.get_rect().move(x, 150)
         self.mask = pygame.mask.from_surface(self.image)
-        self.speed = [0, 0]
-        self.move_requested = {"up": False, "left": False, "right": False}
         
         self.change_x = 0
         self.change_y = 0

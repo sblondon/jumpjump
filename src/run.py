@@ -27,15 +27,22 @@ def start():
     all_sprites.append(blue)
 
     player_actions = {
-            pygame.K_UP: lambda : blue.move_enable("up"),
-            pygame.K_RIGHT: lambda : blue.move_enable("right"),
-            pygame.K_LEFT: lambda : blue.move_enable("left"),
+            pygame.K_UP: lambda : blue.jump(),
+            pygame.K_RIGHT: lambda : blue.go_to_right(),
+            pygame.K_LEFT: lambda : blue.go_to_left(),
 
-            pygame.K_z: lambda : red.move_enable("up"),
-            pygame.K_d: lambda : red.move_enable("right"),
-            pygame.K_q: lambda : red.move_enable("left"),
+            pygame.K_z: lambda : red.jump(),
+            pygame.K_d: lambda : red.go_to_right(),
+            pygame.K_q: lambda : red.go_to_left(),
             }
 
+    player_stop_actions = {
+            pygame.K_RIGHT: lambda : blue.stop_go_to_right(),
+            pygame.K_LEFT: lambda : blue.stop_go_to_left(),
+
+            pygame.K_d: lambda : red.stop_go_to_right(),
+            pygame.K_q: lambda : red.stop_go_to_left(),
+            }
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -44,16 +51,10 @@ def start():
                 if event.key == pygame.K_ESCAPE:
                     run = False
                 elif event.key in player_actions.keys():
-                    player_actions.get(event.key)()
+                    player_actions[event.key]()
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT and blue.change_x < 0:
-                    blue.stop()
-                elif event.key == pygame.K_RIGHT and blue.change_x > 0:
-                    blue.stop()
-                if event.key == pygame.K_q and red.change_x < 0:
-                    red.stop()
-                elif event.key == pygame.K_d and red.change_x > 0:
-                    red.stop()
+                if event.key in player_stop_actions.keys():
+                    player_stop_actions[event.key]()
 
 
         for sprite in all_sprites:

@@ -27,20 +27,24 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.change_x
         self.rect.y += self.change_y
 
-    def move_enable(self, key):
-        if key == "left":
-            self.change_x = -1
-        elif key == "right":
-            self.change_x = 1
-        elif key == "up":
-            self.jump()
+
+    def go_to_right(self):
+        self.change_x = 1
+
+    def go_to_left(self):
+        self.change_x = -1
 
     def jump(self):
         if self.rect.bottom >= consts.WINDOW_SIZE[1]:
             self.change_y = -10
 
-    def stop(self):
-        self.change_x = 0
+    def stop_go_to_left(self):
+        if self.change_x < 0:
+            self.change_x = 0
+
+    def stop_go_to_right(self):
+        if self.change_x > 0:
+            self.change_x = 0
 
     def gravity_effect(self):
 

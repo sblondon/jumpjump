@@ -38,6 +38,9 @@ def start():
             pygame.K_q: lambda : red.move_enable("left"),
             }
 
+    red_player_sprites = pygame.sprite.Group([red])
+    blue_player_sprites = pygame.sprite.Group([blue])
+
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -52,8 +55,7 @@ def start():
             screen.blit(background, o.position, o.position)
 
         for o in objects:
-            if o.should_move():
-                o.move()
+            o.update()
             screen.blit(o.image, o.position)
         pygame.display.update()
 

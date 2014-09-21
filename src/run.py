@@ -13,18 +13,18 @@ def start():
     pygame.key.set_repeat(10, 0)
 
     screen = pygame.display.set_mode(consts.WINDOW_SIZE)
-    run = True
     
     background = pygame.image.load("gfx/background.png").convert()
     screen.blit(background, (0, 0))
 
-    all_sprites = []
+
+    movable_sprites = pygame.sprite.Group()
     ennemy = ennemies.Ennemy()
-    all_sprites.append(ennemy)
+    movable_sprites.add(ennemy)
     red = players.Red()
-    all_sprites.append(red)
+    movable_sprites.add(red)
     blue = players.Blue()
-    all_sprites.append(blue)
+    movable_sprites.add(blue)
 
     player_actions = {
             pygame.K_UP: {
@@ -53,6 +53,7 @@ def start():
                 }
             }
 
+    run = True
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -67,10 +68,10 @@ def start():
                     player_actions[event.key]["stop_action"]()
 
 
-        for sprite in all_sprites:
+        for sprite in movable_sprites:
             screen.blit(background, sprite.rect, sprite.rect)
 
-        for sprite in all_sprites:
+        for sprite in movable_sprites:
             sprite.update()
             screen.blit(sprite.image, sprite.rect)
         pygame.display.update()

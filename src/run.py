@@ -11,7 +11,6 @@ import players
 
 def start():
     pygame.init()
-    pygame.key.set_repeat(10, 0)
 
     screen = pygame.display.set_mode(consts.WINDOW_SIZE)
     
@@ -26,10 +25,11 @@ def start():
     blue = players.Blue()
     movable_sprites.add(blue)
 
+    platform_sprites = pygame.sprite.Group()
     platform = platforms.Platform()
     platform.rect.x = 300
     platform.rect.y = 300
-    movable_sprites.add(platform)
+    platform_sprites.add(platform)
 
     player_actions = {
             pygame.K_UP: {
@@ -75,9 +75,14 @@ def start():
         for sprite in movable_sprites:
             screen.blit(background, sprite.rect, sprite.rect)
 
-        for sprite in movable_sprites:
-            sprite.update()
-            screen.blit(sprite.image, sprite.rect)
+        for sprite in platform_sprites:
+            screen.blit(background, sprite.rect, sprite.rect)
+
+        movable_sprites.update()
+        movable_sprites.draw(screen)
+
+        platform_sprites.update()
+        platform_sprites.draw(screen)
 
         pygame.display.update()
 

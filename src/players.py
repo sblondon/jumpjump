@@ -57,9 +57,14 @@ class Red(Player):
     def __init__(self):
         super(Red, self).__init__("gfx/person-red.png", x=50)
 
+    def __unicode__(self):
+        return u"Red player"
+
 
 class Blue(Player):
 
     def __init__(self):
         super(Blue, self).__init__("gfx/person-blue.png", x=100)
 
+    def __unicode__(self):
+        return u"Blue player"

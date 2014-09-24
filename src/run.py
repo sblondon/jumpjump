@@ -20,11 +20,11 @@ def start():
     screen.blit(level.background, (0, 0))
 
     ennemy = ennemies.Ennemy()
-    level.movable_sprites.add(ennemy)
+    level.ennemy_sprites.add(ennemy)
     red = players.Red()
-    level.movable_sprites.add(red)
+    level.player_sprites.add(red)
     blue = players.Blue()
-    level.movable_sprites.add(blue)
+    level.player_sprites.add(blue)
 
     platform = platforms.Platform()
     platform.rect.x = 300
@@ -75,10 +75,8 @@ def start():
         level.update()
         pygame.display.update()
 
-        if ennemy.touch(red):
-            print "red lost 1 life"
-        if ennemy.touch(blue):
-            print "blue lost 1 life"
+        if level.player_dies():
+            print "Try again!"
 
         pygame.time.delay(10)
 

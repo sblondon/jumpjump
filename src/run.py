@@ -5,6 +5,7 @@ import pygame
 
 import consts
 import ennemies
+import levels
 import platforms
 import players
 
@@ -14,22 +15,21 @@ def start():
 
     screen = pygame.display.set_mode(consts.WINDOW_SIZE)
     
-    background = pygame.image.load("gfx/background.png").convert()
-    screen.blit(background, (0, 0))
+    level = levels.Level()
+    level.background = pygame.image.load("gfx/background.png").convert()
+    screen.blit(level.background, (0, 0))
 
-    movable_sprites = pygame.sprite.Group()
     ennemy = ennemies.Ennemy()
-    movable_sprites.add(ennemy)
+    level.movable_sprites.add(ennemy)
     red = players.Red()
-    movable_sprites.add(red)
+    level.movable_sprites.add(red)
     blue = players.Blue()
-    movable_sprites.add(blue)
+    level.movable_sprites.add(blue)
 
-    platform_sprites = pygame.sprite.Group()
     platform = platforms.Platform()
     platform.rect.x = 300
     platform.rect.y = 300
-    platform_sprites.add(platform)
+    level.platform_sprites.add(platform)
 
     player_actions = {
             pygame.K_UP: {
@@ -72,18 +72,7 @@ def start():
                 if event.key in player_actions.keys():
                     player_actions[event.key]["stop_action"]()
 
-        for sprite in movable_sprites:
-            screen.blit(background, sprite.rect, sprite.rect)
-
-        for sprite in platform_sprites:
-            screen.blit(background, sprite.rect, sprite.rect)
-
-        movable_sprites.update()
-        movable_sprites.draw(screen)
-
-        platform_sprites.update()
-        platform_sprites.draw(screen)
-
+        level.update()
         pygame.display.update()
 
         if ennemy.touch(red):

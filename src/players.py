@@ -17,10 +17,10 @@ class Player(pygame.sprite.Sprite):
         self.change_y = 0
 
     def update(self):
-        self.gravity_effect()
-        self.move()
+        self._gravity_effect()
+        self._move()
 
-    def move(self):
+    def _move(self):
         self.rect.x += self.change_x
         self.rect.y += self.change_y
 
@@ -42,7 +42,7 @@ class Player(pygame.sprite.Sprite):
         if self.change_x > 0:
             self.change_x = 0
 
-    def gravity_effect(self):
+    def _gravity_effect(self):
         if self.change_y == 0:
             self.change_y = 1
         else:

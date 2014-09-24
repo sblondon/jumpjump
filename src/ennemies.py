@@ -17,9 +17,9 @@ class Ennemy(pygame.sprite.Sprite):
         self.speed = [2, 2]
 
     def update(self):
-        self.move()
+        self._move()
 
-    def move(self):
+    def _move(self):
         self.rect = self.rect.move(self.speed)
         if self.rect.left < 0 or self.rect.right > consts.WINDOW_SIZE[0]:
             self.speed[0] *= -1

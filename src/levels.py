@@ -2,6 +2,11 @@
 
 import pygame.sprite
 
+import ennemies
+import platforms
+import players
+
+
 class Level(object):
     def __init__(self):
         self.platform_sprites = pygame.sprite.Group()
@@ -37,3 +42,26 @@ class Level(object):
                     print unicode(player) + u" lost 1 life"
                     return True
      
+    def create_ennemy(self):
+        ennemy = ennemies.Ennemy()
+        self.ennemy_sprites.add(ennemy)
+        return ennemy
+    
+    def create_red_player(self):
+        red = players.Red()
+        self.player_sprites.add(red)
+        return red
+
+    def create_blue_player(self):
+        blue = players.Blue()
+        self.player_sprites.add(blue)
+        return blue
+
+    def create_platform(self, x, y):
+        platform = platforms.Platform()
+        platform.rect.x = x
+        platform.rect.y = y
+        self.platform_sprites.add(platform)
+        return platform
+       
+

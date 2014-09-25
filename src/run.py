@@ -4,7 +4,6 @@ import pygame
 
 
 import consts
-import ennemies
 import levels
 import platforms
 import players
@@ -19,17 +18,11 @@ def start():
     level.background = pygame.image.load("gfx/background.png").convert()
     screen.blit(level.background, (0, 0))
 
-    ennemy = ennemies.Ennemy()
-    level.ennemy_sprites.add(ennemy)
-    red = players.Red()
-    level.player_sprites.add(red)
-    blue = players.Blue()
-    level.player_sprites.add(blue)
+    level.create_ennemy()
+    red = level.create_red_player()
+    blue = level.create_blue_player()
 
-    platform = platforms.Platform()
-    platform.rect.x = 300
-    platform.rect.y = 300
-    level.platform_sprites.add(platform)
+    level.create_platform(300, 300)
 
     player_actions = {
             pygame.K_UP: {

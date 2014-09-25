@@ -49,11 +49,13 @@ class Level(object):
     
     def create_red_player(self):
         red = players.Red()
+        red.level = self
         self.player_sprites.add(red)
         return red
 
     def create_blue_player(self):
         blue = players.Blue()
+        blue.level = self
         self.player_sprites.add(blue)
         return blue
 

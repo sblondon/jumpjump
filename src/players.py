@@ -16,13 +16,33 @@ class Player(pygame.sprite.Sprite):
         self.change_x = 0
         self.change_y = 0
 
+        self.level = None
+
     def update(self):
         self._gravity_effect()
         self._move()
 
     def _move(self):
         self.rect.x += self.change_x
+
+        block_hits = pygame.sprite.spritecollide(self, self.level.platform_sprites, False)
+        for block in block_hits:
+            if self.change_x > 0:
+                self.rect.right = block.rect.left
+            elif self.change_x < 0:
+                self.rect.left = block.rect.right
+
         self.rect.y += self.change_y
+
+        block_hits = pygame.sprite.spritecollide(self, self.level.platform_sprites, False)
+        for block in block_hits:
+            if self.change_y > 0:
+                self.rect.bottom = block.rect.top
+            elif self.change_y < 0:
+                self.rect.top = block.rect.bottom
+
+            self.change_y = 0
+
 
     def go_to_right(self):
         self.change_x = 1
@@ -31,8 +51,17 @@ class Player(pygame.sprite.Sprite):
         self.change_x = -1
 
     def jump(self):
-        if self.rect.bottom >= consts.WINDOW_SIZE[1]:
+        if self._is_on_floor() or self._is_on_platform():
             self.change_y = -10
+
+    def _is_on_floor(self):
+        return self.rect.bottom >= consts.WINDOW_SIZE[1] 
+
+    def _is_on_platform(self):
+        self.rect.y += 2
+        platform_hits = pygame.sprite.spritecollide(self, self.level.platform_sprites, False)
+        self.rect.y -= 2
+        return platform_hits
 
     def stop_go_to_left(self):
         if self.change_x < 0:

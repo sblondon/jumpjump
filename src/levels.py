@@ -46,11 +46,10 @@ class Level(object):
         self.goal_sprites.draw(screen)
       
     def player_dies(self):
-        for ennemy in self.ennemy_sprites:
-            for player in self.player_sprites:
-                if ennemy.touch(player):
-                    print unicode(player) + u" lost 1 life"
-                    return True
+        return pygame.sprite.groupcollide(
+                self.ennemy_sprites, self.player_sprites,
+                False, False,
+                collided=pygame.sprite.collide_mask)
      
     def create_ennemy(self):
         ennemy = ennemies.Ennemy()

@@ -43,6 +43,8 @@ class Player(pygame.sprite.Sprite):
 
             self.change_y = 0
 
+        if self.rect.left < 0 or self.rect.right > consts.WINDOW_SIZE[0]:
+            self.change_x = 0
 
     def go_to_right(self):
         self.change_x = 1

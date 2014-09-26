@@ -46,7 +46,7 @@ class Level(object):
         self.goal_sprites.update()
         self.goal_sprites.draw(screen)
       
-    def player_dies(self):
+    def players_die(self):
         return pygame.sprite.groupcollide(
                 self.ennemy_sprites, self.player_sprites,
                 False, False,

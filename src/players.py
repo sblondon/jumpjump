@@ -13,8 +13,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect().move(x, 150)
         self.mask = pygame.mask.from_surface(self.image)
         
-        self.change_x = 0
-        self.change_y = 0
+        self._change_x = 0
+        self._change_y = 0
 
         self.level = None
 
@@ -23,38 +23,38 @@ class Player(pygame.sprite.Sprite):
         self._move()
 
     def _move(self):
-        self.rect.x += self.change_x
+        self.rect.x += self._change_x
 
         block_hits = pygame.sprite.spritecollide(self, self.level.platform_sprites, False)
         for block in block_hits:
-            if self.change_x > 0:
+            if self._change_x > 0:
                 self.rect.right = block.rect.left
-            elif self.change_x < 0:
+            elif self._change_x < 0:
                 self.rect.left = block.rect.right
 
-        self.rect.y += self.change_y
+        self.rect.y += self._change_y
 
         block_hits = pygame.sprite.spritecollide(self, self.level.platform_sprites, False)
         for block in block_hits:
-            if self.change_y > 0:
+            if self._change_y > 0:
                 self.rect.bottom = block.rect.top
-            elif self.change_y < 0:
+            elif self._change_y < 0:
                 self.rect.top = block.rect.bottom
 
-            self.change_y = 0
+            self._change_y = 0
 
         if self.rect.left < 0 or self.rect.right > consts.WINDOW_SIZE[0]:
-            self.change_x = 0
+            self._change_x = 0
 
     def go_to_right(self):
-        self.change_x = 1
+        self._change_x = 1
 
     def go_to_left(self):
-        self.change_x = -1
+        self._change_x = -1
 
     def jump(self):
         if self._is_on_floor() or self._is_on_platform():
-            self.change_y = -10
+            self._change_y = -10
 
     def _is_on_floor(self):
         return self.rect.bottom >= consts.WINDOW_SIZE[1] 
@@ -66,21 +66,21 @@ class Player(pygame.sprite.Sprite):
         return platform_hits
 
     def stop_go_to_left(self):
-        if self.change_x < 0:
-            self.change_x = 0
+        if self._change_x < 0:
+            self._change_x = 0
 
     def stop_go_to_right(self):
-        if self.change_x > 0:
-            self.change_x = 0
+        if self._change_x > 0:
+            self._change_x = 0
 
     def _gravity_effect(self):
-        if self.change_y == 0:
-            self.change_y = 1
+        if self._change_y == 0:
+            self._change_y = 1
         else:
-            self.change_y += .35
+            self._change_y += .35
 
-        if self.rect.y >= consts.WINDOW_SIZE[1] - self.rect.height and self.change_y >= 0:
-            self.change_y = 0
+        if self.rect.y >= consts.WINDOW_SIZE[1] - self.rect.height and self._change_y >= 0:
+            self._change_y = 0
             self.rect.y = consts.WINDOW_SIZE[1] - self.rect.height
 
 

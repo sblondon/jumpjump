@@ -69,7 +69,7 @@ def start():
         level.update()
         pygame.display.update()
 
-        if level.player_dies():
+        if level.players_die():
             print "Try again!"
 
         if level.players_win():

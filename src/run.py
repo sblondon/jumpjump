@@ -72,6 +72,9 @@ def start():
         if level.player_dies():
             print "Try again!"
 
+        if level.players_win():
+            print "Team wins! :-)"
+
         pygame.time.delay(10)
 
 

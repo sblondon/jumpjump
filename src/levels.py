@@ -17,6 +17,7 @@ class Level(object):
         self.background = None
         self.red_player = None
         self.blue_player = None
+        self.goal = None
 
     def update(self):
         screen = pygame.display.get_surface()
@@ -50,7 +51,11 @@ class Level(object):
                 self.ennemy_sprites, self.player_sprites,
                 False, False,
                 collided=pygame.sprite.collide_mask)
-     
+    
+    def players_win(self):
+        return self.goal.reached()
+
+
     def create_ennemy(self):
         ennemy = ennemies.Ennemy()
         self.ennemy_sprites.add(ennemy)
@@ -82,6 +87,7 @@ class Level(object):
         goal.level = self
         goal.rect.x = x
         goal.rect.y = y
+        self.goal = goal
         self.goal_sprites.add(goal)
         return goal
 

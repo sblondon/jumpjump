@@ -16,22 +16,18 @@ class Goal(pygame.sprite.Sprite):
 
         self.level = None
 
-
     def update(self):
-        collisions = pygame.sprite.groupcollide(self.level.goal_sprites, self.level.player_sprites, False, False)
-        if collisions:
-            if self.level.red_player in collisions.values()[0] and self._current_color == "red":
-                self._player_touch_done += 1
-                self._current_color = "blue"
-                self._reset_image()
-            elif self.level.blue_player in collisions.values()[0] and self._current_color == "blue":
-                self._player_touch_done += 1
-                self._current_color = "red"
-                self._reset_image()
+       if pygame.sprite.collide_rect(self, self.level.red_player) and self._current_color == "red":
+           self._player_touch_done += 1
+           self._current_color = "blue"
+           self._reset_image()
+       elif pygame.sprite.collide_rect(self, self.level.blue_player) and self._current_color == "blue":
+           self._player_touch_done += 1
+           self._current_color = "red"
+           self._reset_image()
 
     def _reset_image(self):
         self.image = pygame.image.load(self._IMAGES[self._current_color]).convert_alpha()
-
 
     def reached(self):
         return self._player_touch_done >= self._player_touch_required

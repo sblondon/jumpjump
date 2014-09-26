@@ -13,7 +13,20 @@ def start():
     pygame.init()
 
     screen = pygame.display.set_mode(consts.WINDOW_SIZE)
-    
+    _play_again = True
+    while _play_again:
+        status = load_level(screen)
+        if status == "Quit":
+            print "Bye"
+            _play_again = False
+        elif status == "Win":
+            print "Team wins! :-)"
+        elif status == "Lose":
+            print "Try again!"
+        else:
+            print "Unknown status"
+   
+def load_level(screen):
     level = levels.Level()
     level.background = pygame.image.load("gfx/background.png").convert()
     screen.blit(level.background, (0, 0))
@@ -52,14 +65,16 @@ def start():
                 }
             }
 
-    run = True
-    while run:
+    _run = True
+    while _run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                _run = False
+                status = "Quit"
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    run = False
+                    _run = False
+                    status = "Quit"
                 elif event.key in player_actions.keys():
                     player_actions[event.key]["start_action"]()
             elif event.type == pygame.KEYUP:
@@ -69,13 +84,16 @@ def start():
         level.update()
         pygame.display.update()
 
+        pygame.time.delay(10)
+
         if level.players_die():
-            print "Try again!"
+            _run = False
+            status = "Lose"
 
         if level.players_win():
-            print "Team wins! :-)"
-
-        pygame.time.delay(10)
+            _run = False
+            status = "Win"
+    return status
 
 
 if __name__ == '__main__':

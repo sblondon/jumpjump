@@ -23,6 +23,7 @@ def start():
     blue = level.create_blue_player()
 
     level.create_platform(300, 350)
+    level.create_goal(500, 400)
 
     player_actions = {
             pygame.K_UP: {

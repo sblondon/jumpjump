@@ -6,5 +6,5 @@ run:
 	sh ./src/run.sh
 
 clean:
-	find . -name *.pyc -delete
+	find . -name "*.pyc" -delete
 

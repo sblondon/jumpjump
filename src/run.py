@@ -23,9 +23,7 @@ def start():
             print "Team wins! :-)"
         elif status == "Lose":
             print "Try again!"
-        else:
-            print "Unknown status"
-   
+
 def load_level(screen):
     level = levels.Level()
     level.background = pygame.image.load("gfx/background.png").convert()
@@ -97,7 +95,6 @@ def load_level(screen):
 
 
 if __name__ == '__main__':
-    print "Let's play!"
     start()
     pygame.quit()
 

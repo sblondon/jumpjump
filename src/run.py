@@ -20,9 +20,20 @@ def start():
             print "Bye"
             _play_again = False
         elif status == "Win":
-            print "Team wins! :-)"
+            load_win(screen)
         elif status == "Lose":
-            print "Try again!"
+            load_lose(screen)
+
+_SECONDS = 1000
+_FIVE_SECONDS = 5 * _SECONDS
+
+def load_win(screen):
+    print "Team wins! :-)"
+    pygame.time.delay(_FIVE_SECONDS)
+
+def load_lose(screen):
+    print "Try again!"
+    pygame.time.delay(_FIVE_SECONDS)
 
 def load_level(screen):
     level = levels.Level()

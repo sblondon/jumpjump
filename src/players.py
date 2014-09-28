@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import pygame.display
 import pygame.image
 import pygame.sprite
-
-import consts
 
 
 class Player(pygame.sprite.Sprite):
@@ -17,6 +16,8 @@ class Player(pygame.sprite.Sprite):
         self._change_y = 0
 
         self.level = None
+        self._screen = pygame.display.get_surface()
+
 
     def update(self):
         self._gravity_effect()
@@ -43,7 +44,7 @@ class Player(pygame.sprite.Sprite):
 
             self._change_y = 0
 
-        if self.rect.left < 0 or self.rect.right > consts.WINDOW_SIZE[0]:
+        if self.rect.left < 0 or self.rect.right > self._screen.get_width():
             self._change_x = 0
 
     def go_to_right(self):
@@ -57,7 +58,7 @@ class Player(pygame.sprite.Sprite):
             self._change_y = -10
 
     def _is_on_floor(self):
-        return self.rect.bottom >= consts.WINDOW_SIZE[1] 
+        return self.rect.bottom >= self._screen.get_height() 
 
     def _is_on_platform(self):
         self.rect.y += 2
@@ -79,9 +80,9 @@ class Player(pygame.sprite.Sprite):
         else:
             self._change_y += .35
 
-        if self.rect.y >= consts.WINDOW_SIZE[1] - self.rect.height and self._change_y >= 0:
+        if self.rect.y >= self._screen.get_height() - self.rect.height and self._change_y >= 0:
             self._change_y = 0
-            self.rect.y = consts.WINDOW_SIZE[1] - self.rect.height
+            self.rect.y = self._screen.get_height() - self.rect.height
 
 
 class Red(Player):

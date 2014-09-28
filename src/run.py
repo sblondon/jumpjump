@@ -2,19 +2,18 @@
 
 import pygame
 
-
-import consts
 import levels
 import lose
 import platforms
 import players
 import win
 
+WINDOW_SIZE = 640, 480
 
 def start():
     pygame.init()
 
-    screen = pygame.display.set_mode(consts.WINDOW_SIZE)
+    screen = pygame.display.set_mode(WINDOW_SIZE)
     _play_again = True
     while _play_again:
         status = levels.display_level(screen)

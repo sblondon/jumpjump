@@ -3,8 +3,9 @@
 import pygame.time
 
 import consts
+import engine
 
 def display_win(screen):
-    print "Team wins! :-)"
+    engine.display_simple_message(screen, "Team wins! :-)")
     pygame.time.delay(consts.FIVE_SECONDS)
 

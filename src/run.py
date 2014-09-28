@@ -2,6 +2,8 @@
 
 import pygame
 
+import consts
+import engine
 import levels
 import lose
 import platforms
@@ -14,6 +16,8 @@ def start():
     pygame.init()
 
     screen = pygame.display.set_mode(WINDOW_SIZE)
+
+    engine.display_simple_message(screen, "JumpJump", duration=consts.SHORT_DISPLAY_DURATION)
     _play_again = True
     while _play_again:
         status = levels.display_level(screen)

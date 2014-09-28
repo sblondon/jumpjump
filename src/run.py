@@ -22,9 +22,9 @@ def start():
             print "Bye"
             _play_again = False
         elif status == "Win":
-            win.display_screen(screen)
+            win.display_win(screen)
         elif status == "Lose":
-            lose.display_screen(screen)
+            lose.display_lose(screen)
 
 
 if __name__ == '__main__':

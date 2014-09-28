@@ -2,6 +2,8 @@
 
 import engine
 
-def display_win(screen):
-    engine.display_simple_message(screen, u"Team wins! :-)")
+def display_win(screen, win_games):
+    template = u"Team wins %d game :-)" if win_games == 1 else u"Team wins %d games :-)"
+    message = template % win_games
+    engine.display_simple_message(screen, message)
 

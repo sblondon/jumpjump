@@ -7,10 +7,11 @@ import consts
 
 def display_simple_message(screen, message, duration=consts.DEFAULT_DISPLAY_DURATION):
     font = pygame.font.Font(consts.FONT_PATH, 36)
-    text = font.render(message, 1, (10, 10, 10))
+    TEXT_COLOR = (10, 10, 10)
+    text = font.render(message, True, TEXT_COLOR)
     background = pygame.Surface(screen.get_size()).convert()
-    _BACKGROUND_COLOR = (250, 250, 250)
-    background.fill(_BACKGROUND_COLOR)
+    BACKGROUND_COLOR = (250, 250, 250)
+    background.fill(BACKGROUND_COLOR)
     textpos = text.get_rect(
             centerx=background.get_width()/2,
             centery=background.get_height()/2

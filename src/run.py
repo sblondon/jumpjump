@@ -18,6 +18,7 @@ def start():
     screen = pygame.display.set_mode(WINDOW_SIZE)
 
     engine.display_simple_message(screen, "JumpJump", duration=consts.SHORT_DISPLAY_DURATION)
+    _win_games = 0
     _play_again = True
     while _play_again:
         status = levels.display_level(screen)
@@ -25,8 +26,10 @@ def start():
             print "Bye"
             _play_again = False
         elif status == "Win":
-            win.display_win(screen)
+            _win_games += 1
+            win.display_win(screen, _win_games)
         elif status == "Lose":
+            _win_games = 0
             lose.display_lose(screen)
 
 

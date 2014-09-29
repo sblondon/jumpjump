@@ -19,6 +19,7 @@ def start():
 
     engine.display_simple_message(screen, "JumpJump", duration=consts.SHORT_DISPLAY_DURATION)
     _win_games = 0
+    _lives = 3
     _play_again = True
     while _play_again:
         status = levels.display_level(screen)
@@ -29,8 +30,13 @@ def start():
             _win_games += 1
             win.display_win(screen, _win_games)
         elif status == "Lose":
-            _win_games = 0
-            lose.display_lose(screen)
+            _lives -= 1
+            if _lives == 0:
+                lose.display_lose_game(screen)
+                _win_games = 0
+                _lives = 3
+            else:
+                lose.display_lose_level(screen)
 
 
 if __name__ == '__main__':

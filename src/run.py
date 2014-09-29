@@ -22,7 +22,7 @@ def start():
     _lives = 3
     _play_again = True
     while _play_again:
-        status = levels.display_level(screen)
+        status = levels.display_level(screen, _lives)
         if status == "Quit":
             print "Bye"
             _play_again = False

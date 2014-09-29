@@ -2,6 +2,7 @@
 
 import pygame.sprite
 
+import engine
 import ennemies
 import goals
 import platforms
@@ -91,10 +92,18 @@ class Level(object):
         self.goal_sprites.add(goal)
         return goal
 
-
-def display_level(screen):
+def display_level(screen, lives):
     level = Level()
     level.background = pygame.image.load("gfx/background.png").convert()
+
+    TEXT_COLOR = (200, 0, 0)
+    hearts = u"♥" * lives
+    text = engine.build_message(hearts, TEXT_COLOR) 
+    textpos = text.get_rect(
+            centerx=level.background.get_width()/2,
+            )
+    level.background.blit(text, textpos)
+
     screen.blit(level.background, (0, 0))
 
     level.create_ennemy()

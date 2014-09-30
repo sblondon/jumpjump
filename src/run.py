@@ -21,7 +21,10 @@ def run():
 
     game = games.Game()
     while game.play_again:
-        game = levels.display_level(screen, game)
+        if game.won_levels == 0:
+            game = levels.display_level_0(screen, game)
+        else:
+            game = levels.display_level_1(screen, game)
         if game.status == "Quit":
             print("Bye")
             game.play_again = False

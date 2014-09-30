@@ -165,9 +165,11 @@ def display_level(screen, game):
         if level.players_die():
             _run = False
             game["status"] = "Lose"
+            game["lives"] -= 1
 
         if level.players_win():
             _run = False
             game["status"] = "Win"
+            game["won_games"] += 1
     return game
 

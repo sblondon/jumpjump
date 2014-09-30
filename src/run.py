@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import copy
 
 import pygame
 
@@ -18,6 +19,7 @@ def start():
     screen = pygame.display.set_mode(WINDOW_SIZE)
 
     engine.display_simple_message(screen, "JumpJump", duration=consts.SHORT_DISPLAY_DURATION)
+
     game = {"won_games": 0, "lives": 3, "play_again": True, "status": None}
     while game["play_again"]:
         game = levels.display_level(screen, game)
@@ -26,16 +28,14 @@ def start():
             game["play_again"] = False
             game["status"] = None
         elif game["status"] == "Win":
-            game["won_games"] += 1
             game["status"] = None
             win.display_win(screen, game["won_games"])
         elif game["status"] == "Lose":
-            game["lives"] -= 1
             game["status"] = None
             if game["lives"] == 0:
                 lose.display_lose_game(screen)
-                game["won_games"] = 0
                 game["lives"] = 3
+                game["won_games"] = 0
             else:
                 lose.display_lose_level(screen)
 

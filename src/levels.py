@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import abc
 
 import pygame.display
 import pygame.sprite
@@ -18,8 +17,8 @@ class Level(object):
         self.ennemy_sprites = pygame.sprite.Group()
         self.goal_sprites = pygame.sprite.Group()
         self.background = None
-        self.red_player = None
-        self.blue_player = None
+        self.red_player = self.create_red_player()
+        self.blue_player = self.create_blue_player()
         self.goal = None
 
         self.screen = pygame.display.get_surface()
@@ -83,14 +82,12 @@ class Level(object):
         red = players.Red()
         red.level = self
         self.player_sprites.add(red)
-        self.red_player = red
         return red
 
     def create_blue_player(self):
         blue = players.Blue()
         blue.level = self
         self.player_sprites.add(blue)
-        self.blue_player = blue
         return blue
 
     def create_platform(self, x, y):
@@ -108,11 +105,6 @@ class Level(object):
         self.goal = goal
         self.goal_sprites.add(goal)
         return goal
-
-    @abc.abstractmethod
-    def create_sprites(self):
-        self.create_red_player()
-        self.create_blue_player()
 
     def play(self):
         player_actions = {
@@ -178,9 +170,6 @@ class Level(object):
 class Level1(Level):
     def __init__(self, game):
         super(Level1, self).__init__(game, "gfx/background.png")
-
-    def create_sprites(self):
-        super(Level1, self).create_sprites()
         self.create_ennemy()
         self.create_platform(300, 350)
         self.create_goal(500, 400)
@@ -189,9 +178,6 @@ class Level1(Level):
 class Level0(Level):
     def __init__(self, game):
         super(Level0, self).__init__(game, "gfx/background.png")
-
-    def create_sprites(self):
-        super(Level0, self).create_sprites()
         self.create_ennemy()
         self.create_platform(350, 50)
         self.create_platform(350, 100)
@@ -202,7 +188,5 @@ def select_level(game):
     lvls = {0: Level0,
             1: Level1}
     _Level = lvls.get(game.won_levels, Level1)
-    level = _Level(game)
-    level.create_sprites()
-    return level
+    return _Level(game)
 

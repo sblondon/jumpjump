@@ -18,23 +18,24 @@ def start():
     screen = pygame.display.set_mode(WINDOW_SIZE)
 
     engine.display_simple_message(screen, "JumpJump", duration=consts.SHORT_DISPLAY_DURATION)
-    _win_games = 0
-    _lives = 3
-    _play_again = True
-    while _play_again:
-        status = levels.display_level(screen, _lives)
-        if status == "Quit":
+    game = {"won_games": 0, "lives": 3, "play_again": True, "status": None}
+    while game["play_again"]:
+        game = levels.display_level(screen, game)
+        if game["status"] == "Quit":
             print "Bye"
-            _play_again = False
-        elif status == "Win":
-            _win_games += 1
-            win.display_win(screen, _win_games)
-        elif status == "Lose":
-            _lives -= 1
-            if _lives == 0:
+            game["play_again"] = False
+            game["status"] = None
+        elif game["status"] == "Win":
+            game["won_games"] += 1
+            game["status"] = None
+            win.display_win(screen, game["won_games"])
+        elif game["status"] == "Lose":
+            game["lives"] -= 1
+            game["status"] = None
+            if game["lives"] == 0:
                 lose.display_lose_game(screen)
-                _win_games = 0
-                _lives = 3
+                game["won_games"] = 0
+                game["lives"] = 3
             else:
                 lose.display_lose_level(screen)
 

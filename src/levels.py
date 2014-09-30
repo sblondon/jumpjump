@@ -92,7 +92,8 @@ class Level(object):
         self.goal_sprites.add(goal)
         return goal
 
-def display_level(screen, lives):
+def display_level(screen, game):
+    lives = game["lives"]
     level = Level()
     level.background = pygame.image.load("gfx/background.png").convert()
 
@@ -145,11 +146,11 @@ def display_level(screen, lives):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 _run = False
-                status = "Quit"
+                game["status"] = "Quit"
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     _run = False
-                    status = "Quit"
+                    game["status"] = "Quit"
                 elif event.key in player_actions.keys():
                     player_actions[event.key]["start_action"]()
             elif event.type == pygame.KEYUP:
@@ -163,10 +164,10 @@ def display_level(screen, lives):
 
         if level.players_die():
             _run = False
-            status = "Lose"
+            game["status"] = "Lose"
 
         if level.players_win():
             _run = False
-            status = "Win"
-    return status
+            game["status"] = "Win"
+    return game
 

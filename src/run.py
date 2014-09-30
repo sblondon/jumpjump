@@ -15,8 +15,7 @@ import win
 WINDOW_SIZE = 640, 480
 
 
-
-def start():
+def run():
     pygame.init()
 
     screen = pygame.display.set_mode(WINDOW_SIZE)
@@ -27,7 +26,7 @@ def start():
     while game.play_again:
         game = levels.display_level(screen, game)
         if game.status == "Quit":
-            print "Bye"
+            print("Bye")
             game.play_again = False
             game.status = None
         elif game.status == "Win":
@@ -43,6 +42,6 @@ def start():
 
 
 if __name__ == '__main__':
-    start()
+    run()
     pygame.quit()
 

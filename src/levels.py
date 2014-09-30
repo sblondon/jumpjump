@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import abc
 
 import pygame.sprite
 
@@ -10,7 +11,7 @@ import players
 
 
 class Level(object):
-    def __init__(self):
+    def __init__(self, screen, game, background_path):
         self.platform_sprites = pygame.sprite.Group()
         self.player_sprites = pygame.sprite.Group()
         self.ennemy_sprites = pygame.sprite.Group()
@@ -19,6 +20,19 @@ class Level(object):
         self.red_player = None
         self.blue_player = None
         self.goal = None
+
+        self.background = pygame.image.load(background_path).convert()
+        TEXT_COLOR = (200, 0, 0)
+        hearts = u"♥" * game.lives
+        text = engine.build_message(hearts, TEXT_COLOR)
+        textpos = text.get_rect(
+                centerx=self.background.get_width()/2,
+                )
+        self.background.blit(text, textpos)
+    
+        screen.blit(self.background, (0, 0))
+    
+
 
     def update(self):
         screen = pygame.display.get_surface()
@@ -92,134 +106,63 @@ class Level(object):
         self.goal_sprites.add(goal)
         return goal
 
+    @abc.abstractmethod
+    def create_sprites(self):
+        self.create_red_player()
+        self.create_blue_player()
+
+
+class Level1(Level):
+    def create_sprites(self):
+        super(Level1, self).create_sprites()
+        self.create_ennemy()
+        self.create_platform(300, 350)
+        self.create_goal(500, 400)
 
 def display_level_1(screen, game):
-    level = Level()
-    level.background = pygame.image.load("gfx/background.png").convert()
+    level = Level1(screen, game, "gfx/background.png")
+    level.create_sprites()
+    return _display_level(screen, game, level)
 
-    TEXT_COLOR = (200, 0, 0)
-    hearts = u"♥" * game.lives
-    text = engine.build_message(hearts, TEXT_COLOR) 
-    textpos = text.get_rect(
-            centerx=level.background.get_width()/2,
-            )
-    level.background.blit(text, textpos)
 
-    screen.blit(level.background, (0, 0))
-
-    level.create_ennemy()
-    red = level.create_red_player()
-    blue = level.create_blue_player()
-
-    level.create_platform(300, 350)
-    level.create_goal(500, 400)
-
-    player_actions = {
-            pygame.K_UP: {
-                "start_action": blue.jump,
-                "stop_action": lambda: None,
-                },
-            pygame.K_RIGHT: {
-                "start_action": blue.go_to_right,
-                "stop_action": blue.stop_go_to_right,
-                },
-            pygame.K_LEFT: {
-                "start_action": blue.go_to_left,
-                "stop_action": blue.stop_go_to_left,
-                },
-            pygame.K_z: {
-                "start_action": red.jump,
-                "stop_action": lambda: None,
-                },
-            pygame.K_d: {
-                "start_action": red.go_to_right,
-                "stop_action": red.stop_go_to_right,
-                },
-            pygame.K_q: {
-                "start_action": red.go_to_left,
-                "stop_action": red.stop_go_to_left,
-                }
-            }
-
-    _run = True
-    while _run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                _run = False
-                game.status = "Quit"
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    _run = False
-                    game.status = "Quit"
-                elif event.key in player_actions.keys():
-                    player_actions[event.key]["start_action"]()
-            elif event.type == pygame.KEYUP:
-                if event.key in player_actions.keys():
-                    player_actions[event.key]["stop_action"]()
-
-        level.update()
-        pygame.display.update()
-
-        pygame.time.delay(10)
-
-        if level.players_die():
-            _run = False
-            game.status = "Lose"
-            game.lives -= 1
-
-        if level.players_win():
-            _run = False
-            game.status = "Win"
-            game.won_levels += 1
-    return game
-
+class Level0(Level):
+    def create_sprites(self):
+        super(Level0, self).create_sprites()
+        self.create_platform(350, 50)
+        self.create_platform(350, 100)
+        self.create_goal(400, 400)
 
 def display_level_0(screen, game):
-    level = Level()
-    level.background = pygame.image.load("gfx/background.png").convert()
+    level = Level0(screen, game, "gfx/background.png")
+    level.create_sprites()
+    return _display_level(screen, game, level)
 
-    TEXT_COLOR = (200, 0, 0)
-    hearts = u"♥" * game.lives
-    text = engine.build_message(hearts, TEXT_COLOR)
-    textpos = text.get_rect(
-            centerx=level.background.get_width()/2,
-            )
-    level.background.blit(text, textpos)
 
-    screen.blit(level.background, (0, 0))
-
-    level.create_ennemy()
-    red = level.create_red_player()
-    blue = level.create_blue_player()
-
-    level.create_platform(350, 50)
-    level.create_platform(350, 100)
-    level.create_goal(400, 400)
-
+def _display_level(screen, game, level):
     player_actions = {
             pygame.K_UP: {
-                "start_action": blue.jump,
+                "start_action": level.blue_player.jump,
                 "stop_action": lambda: None,
                 },
             pygame.K_RIGHT: {
-                "start_action": blue.go_to_right,
-                "stop_action": blue.stop_go_to_right,
+                "start_action": level.blue_player.go_to_right,
+                "stop_action": level.blue_player.stop_go_to_right,
                 },
             pygame.K_LEFT: {
-                "start_action": blue.go_to_left,
-                "stop_action": blue.stop_go_to_left,
+                "start_action": level.blue_player.go_to_left,
+                "stop_action": level.blue_player.stop_go_to_left,
                 },
             pygame.K_z: {
-                "start_action": red.jump,
+                "start_action": level.red_player.jump,
                 "stop_action": lambda: None,
                 },
             pygame.K_d: {
-                "start_action": red.go_to_right,
-                "stop_action": red.stop_go_to_right,
+                "start_action": level.red_player.go_to_right,
+                "stop_action": level.red_player.stop_go_to_right,
                 },
             pygame.K_q: {
-                "start_action": red.go_to_left,
-                "stop_action": red.stop_go_to_left,
+                "start_action": level.red_player.go_to_left,
+                "stop_action": level.red_player.stop_go_to_left,
                 }
             }
 

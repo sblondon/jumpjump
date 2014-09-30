@@ -34,7 +34,7 @@ def run():
             game.status = None
             if game.lives == 0:
                 lose.display_lose_game()
-                game.reset_game()
+                game.reset()
             else:
                 lose.display_lose_level()
 

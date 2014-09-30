@@ -37,8 +37,7 @@ def start():
             game.status = None
             if game.lives == 0:
                 lose.display_lose_game(screen)
-                game.lives = 3
-                game.won_games = 0
+                game.reset_game()
             else:
                 lose.display_lose_level(screen)
 

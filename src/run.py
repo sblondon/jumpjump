@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import copy
 
 import pygame
 
@@ -8,8 +7,6 @@ import engine
 import games
 import levels
 import lose
-import platforms
-import players
 import win
 
 WINDOW_SIZE = 640, 480

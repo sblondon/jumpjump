@@ -93,12 +93,11 @@ class Level(object):
         return goal
 
 def display_level(screen, game):
-    lives = game["lives"]
     level = Level()
     level.background = pygame.image.load("gfx/background.png").convert()
 
     TEXT_COLOR = (200, 0, 0)
-    hearts = u"♥" * lives
+    hearts = u"♥" * game.lives
     text = engine.build_message(hearts, TEXT_COLOR) 
     textpos = text.get_rect(
             centerx=level.background.get_width()/2,
@@ -146,11 +145,11 @@ def display_level(screen, game):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 _run = False
-                game["status"] = "Quit"
+                game.status = "Quit"
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     _run = False
-                    game["status"] = "Quit"
+                    game.status = "Quit"
                 elif event.key in player_actions.keys():
                     player_actions[event.key]["start_action"]()
             elif event.type == pygame.KEYUP:
@@ -164,12 +163,12 @@ def display_level(screen, game):
 
         if level.players_die():
             _run = False
-            game["status"] = "Lose"
-            game["lives"] -= 1
+            game.status = "Lose"
+            game.lives -= 1
 
         if level.players_win():
             _run = False
-            game["status"] = "Win"
-            game["won_games"] += 1
+            game.status = "Win"
+            game.won_games += 1
     return game
 

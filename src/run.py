@@ -21,24 +21,22 @@ def run():
 
     game = games.Game()
     while game.play_again:
-        if game.won_levels == 0:
-            game = levels.display_level_0(screen, game)
-        else:
-            game = levels.display_level_1(screen, game)
+        level = levels.select_level(game)
+        game = level.play()
         if game.status == "Quit":
             print("Bye")
             game.play_again = False
             game.status = None
         elif game.status == "Win":
             game.status = None
-            win.display_win(screen, game)
+            win.display_win(game)
         elif game.status == "Lose":
             game.status = None
             if game.lives == 0:
-                lose.display_lose_game(screen)
+                lose.display_lose_game()
                 game.reset_game()
             else:
-                lose.display_lose_level(screen)
+                lose.display_lose_level()
 
 
 if __name__ == '__main__':

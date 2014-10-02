@@ -175,7 +175,7 @@ class Level1(Level):
         self.create_goal(500, 400)
 
     def create_ennemies(self):
-        ennemy = ennemies.BouncingEnnemy(50, 50)
+        ennemy = ennemies.FastBouncingEnnemy(50, 50)
         self.ennemy_sprites.add(ennemy)
         return ennemy
 
@@ -189,7 +189,7 @@ class Level0(Level):
         self.create_goal(400, 400)
 
     def create_ennemies(self):
-        ennemy = ennemies.BouncingEnnemy(250, 150)
+        ennemy = ennemies.SlowBouncingEnnemy(250, 150)
         self.ennemy_sprites.add(ennemy)
         return ennemy
 

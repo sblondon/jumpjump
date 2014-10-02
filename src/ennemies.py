@@ -8,12 +8,12 @@ import pygame.sprite
 
 class BouncingEnnemy(pygame.sprite.Sprite):
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, speed, image):
         super(BouncingEnnemy, self).__init__()
-        self.image = pygame.image.load("gfx/ennemy.png").convert_alpha()
+        self.image = pygame.image.load(image).convert_alpha()
         self.rect = self.image.get_rect().move(x, y)
         self.mask = pygame.mask.from_surface(self.image)
-        self._speed = [2, 2]
+        self._speed = speed
 
         self._screen = pygame.display.get_surface()
 
@@ -31,4 +31,14 @@ class BouncingEnnemy(pygame.sprite.Sprite):
         hitbox = self.rect.inflate(-5, -5)
         if hitbox.colliderect(player.rect):
             return pygame.sprite.collide_mask(self, player)
+
+
+class SlowBouncingEnnemy(BouncingEnnemy):
+    def __init__(self, x, y):
+        super(SlowBouncingEnnemy, self).__init__(x, y, [1, 1], "gfx/slow-bouncing.png")
+
+
+class FastBouncingEnnemy(BouncingEnnemy):
+    def __init__(self, x, y):
+        super(FastBouncingEnnemy, self).__init__(x, y, [2, 2], "gfx/fast-bouncing.png")
 

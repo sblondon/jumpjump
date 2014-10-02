@@ -5,7 +5,8 @@ import pygame.time
 
 import consts
 
-def display_simple_message(screen, message, duration=consts.DEFAULT_DISPLAY_DURATION):
+def display_simple_message(message, duration=consts.DEFAULT_DISPLAY_DURATION):
+    screen = pygame.display.get_surface()
     text = build_message(message)
     background = pygame.Surface(screen.get_size()).convert()
     BACKGROUND_COLOR = (250, 250, 250)

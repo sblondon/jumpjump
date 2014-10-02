@@ -191,7 +191,6 @@ def select_level(game):
     return _Level(game)
 
 def introduce_level(game):
-    screen = pygame.display.get_surface()
     msg = u"Level %d" % (game.won_levels + 1)
-    engine.display_simple_message(screen, msg)
+    engine.display_simple_message(msg)
 

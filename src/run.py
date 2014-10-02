@@ -21,6 +21,7 @@ def run():
 
     game = games.Game()
     while game.play_again:
+        levels.introduce_level(game)
         level = levels.select_level(game)
         game = level.play()
         if game.status == "Quit":
@@ -29,7 +30,6 @@ def run():
             game.status = None
         elif game.status == "Win":
             game.status = None
-            win.display_win(game)
         elif game.status == "Lose":
             game.status = None
             if game.lives == 0:

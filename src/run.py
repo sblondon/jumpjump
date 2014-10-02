@@ -7,7 +7,6 @@ import engine
 import games
 import levels
 import lose
-import win
 
 WINDOW_SIZE = 640, 480
 
@@ -33,7 +32,7 @@ def run():
         elif game.status == "Lose":
             game.status = None
             if game.lives == 0:
-                lose.display_lose_game()
+                lose.display_lose_game(game)
                 game.reset()
             else:
                 lose.display_lose_level()

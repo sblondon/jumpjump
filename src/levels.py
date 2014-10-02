@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import abc
 
 import pygame.display
 import pygame.sprite
@@ -72,11 +73,10 @@ class Level(object):
     def players_win(self):
         return self.goal.reached()
 
+    @abc.abstractmethod
+    def create_ennemies(self):
+        pass
 
-    def create_ennemy(self):
-        ennemy = ennemies.Ennemy()
-        self.ennemy_sprites.add(ennemy)
-        return ennemy
     
     def create_red_player(self):
         red = players.Red()
@@ -170,18 +170,29 @@ class Level(object):
 class Level1(Level):
     def __init__(self, game):
         super(Level1, self).__init__(game, "gfx/background.png")
-        self.create_ennemy()
+        self.create_ennemies()
         self.create_platform(300, 350)
         self.create_goal(500, 400)
+
+    def create_ennemies(self):
+        ennemy = ennemies.BouncingEnnemy(50, 50)
+        self.ennemy_sprites.add(ennemy)
+        return ennemy
 
 
 class Level0(Level):
     def __init__(self, game):
         super(Level0, self).__init__(game, "gfx/background.png")
-        self.create_ennemy()
+        self.create_ennemies()
         self.create_platform(350, 50)
         self.create_platform(350, 100)
         self.create_goal(400, 400)
+
+    def create_ennemies(self):
+        ennemy = ennemies.BouncingEnnemy(250, 150)
+        self.ennemy_sprites.add(ennemy)
+        return ennemy
+
 
 
 def select_level(game):

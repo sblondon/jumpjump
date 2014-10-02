@@ -167,19 +167,6 @@ class Level(object):
         return self.game
 
 
-class Level1(Level):
-    def __init__(self, game):
-        super(Level1, self).__init__(game, "gfx/background.png")
-        self.create_ennemies()
-        self.create_platform(300, 350)
-        self.create_goal(500, 400)
-
-    def create_ennemies(self):
-        ennemy = ennemies.FastBouncingEnnemy(50, 50)
-        self.ennemy_sprites.add(ennemy)
-        return ennemy
-
-
 class Level0(Level):
     def __init__(self, game):
         super(Level0, self).__init__(game, "gfx/background.png")
@@ -191,14 +178,42 @@ class Level0(Level):
     def create_ennemies(self):
         ennemy = ennemies.SlowBouncingEnnemy(250, 150)
         self.ennemy_sprites.add(ennemy)
-        return ennemy
+
+
+class Level1(Level):
+    def __init__(self, game):
+        super(Level1, self).__init__(game, "gfx/background.png")
+        self.create_ennemies()
+        self.create_platform(300, 350)
+        self.create_goal(500, 400)
+
+    def create_ennemies(self):
+        ennemy = ennemies.FastBouncingEnnemy(50, 50)
+        self.ennemy_sprites.add(ennemy)
+
+
+class Level2(Level):
+    def __init__(self, game):
+        super(Level2, self).__init__(game, "gfx/background.png")
+        self.create_ennemies()
+        self.create_platform(200, 420)
+        self.create_goal(300, 350)
+
+    def create_ennemies(self):
+        ennemy = ennemies.SlowBouncingEnnemy(250, 50)
+        self.ennemy_sprites.add(ennemy)
+        ennemy = ennemies.SlowBouncingEnnemy(450, 150)
+        self.ennemy_sprites.add(ennemy)
+
 
 
 
 def select_level(game):
-    lvls = {0: Level0,
-            1: Level1}
-    _Level = lvls.get(game.won_levels, Level1)
+    LVLS = {0: Level0,
+            1: Level1,
+            2: Level2}
+    HigherLevel = LVLS[max(LVLS.keys())]
+    _Level = LVLS.get(game.won_levels, HigherLevel)
     return _Level(game)
 
 def introduce_level(game):

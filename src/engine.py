@@ -28,8 +28,8 @@ def build_message(message, text_color=(10, 10, 10)):
 
 
 def image_path(filename):
-    return "gfx/" + filename
+    return "assets/gfx/" + filename
 
 def font_path(filename):
-    return "fonts/" + filename
+    return "assets/fonts/" + filename
 

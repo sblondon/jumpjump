@@ -5,6 +5,8 @@ import pygame.image
 import pygame.mask
 import pygame.sprite
 
+import engine
+
 
 class BouncingEnnemy(pygame.sprite.Sprite):
 
@@ -35,10 +37,10 @@ class BouncingEnnemy(pygame.sprite.Sprite):
 
 class SlowBouncingEnnemy(BouncingEnnemy):
     def __init__(self, x, y):
-        super(SlowBouncingEnnemy, self).__init__(x, y, [1, 1], "gfx/slow-bouncing.png")
+        super(SlowBouncingEnnemy, self).__init__(x, y, [1, 1], engine.image_path("slow-bouncing.png"))
 
 
 class FastBouncingEnnemy(BouncingEnnemy):
     def __init__(self, x, y):
-        super(FastBouncingEnnemy, self).__init__(x, y, [2, 2], "gfx/fast-bouncing.png")
+        super(FastBouncingEnnemy, self).__init__(x, y, [2, 2], engine.image_path("fast-bouncing.png"))
 

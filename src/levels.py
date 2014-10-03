@@ -76,7 +76,6 @@ class Level(object):
     @abc.abstractmethod
     def create_ennemies(self):
         pass
-
     
     def create_red_player(self):
         red = players.Red()
@@ -169,7 +168,7 @@ class Level(object):
 
 class Level0(Level):
     def __init__(self, game):
-        super(Level0, self).__init__(game, "gfx/background.png")
+        super(Level0, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
         self.create_platform(350, 50)
         self.create_platform(350, 100)
@@ -182,7 +181,7 @@ class Level0(Level):
 
 class Level1(Level):
     def __init__(self, game):
-        super(Level1, self).__init__(game, "gfx/background.png")
+        super(Level1, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
         self.create_platform(300, 350)
         self.create_goal(500, 400)
@@ -194,7 +193,7 @@ class Level1(Level):
 
 class Level2(Level):
     def __init__(self, game):
-        super(Level2, self).__init__(game, "gfx/background.png")
+        super(Level2, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
         self.create_platform(200, 420)
         self.create_goal(300, 350)
@@ -204,8 +203,6 @@ class Level2(Level):
         self.ennemy_sprites.add(ennemy)
         ennemy = ennemies.SlowBouncingEnnemy(450, 150)
         self.ennemy_sprites.add(ennemy)
-
-
 
 
 def select_level(game):

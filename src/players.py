@@ -4,6 +4,8 @@ import pygame.display
 import pygame.image
 import pygame.sprite
 
+import engine
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, image_path, x):
@@ -87,7 +89,7 @@ class Player(pygame.sprite.Sprite):
 
 class Red(Player):
     def __init__(self):
-        super(Red, self).__init__("gfx/person-red.png", x=50)
+        super(Red, self).__init__(engine.image_path("person-red.png"), x=50)
 
     def __unicode__(self):
         return u"Red player"
@@ -96,7 +98,7 @@ class Red(Player):
 class Blue(Player):
 
     def __init__(self):
-        super(Blue, self).__init__("gfx/person-blue.png", x=100)
+        super(Blue, self).__init__(engine.image_path("person-blue.png"), x=100)
 
     def __unicode__(self):
         return u"Blue player"

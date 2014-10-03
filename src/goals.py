@@ -4,11 +4,13 @@ import random
 import pygame.image
 import pygame.sprite
 
+import engine
+
 
 class Goal(pygame.sprite.Sprite):
     def __init__(self):
         super(Goal, self).__init__()
-        self._IMAGES = {"blue": "gfx/goal-blue.png", "red": "gfx/goal-red.png"}
+        self._IMAGES = {"blue": engine.image_path("goal-blue.png"), "red": engine.image_path("goal-red.png")}
         self._current_color = random.choice(self._IMAGES.keys())
         self.image = self._set_image()
         self.rect = self.image.get_rect()

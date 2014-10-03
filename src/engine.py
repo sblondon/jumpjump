@@ -23,6 +23,13 @@ def display_simple_message(message, duration=consts.DEFAULT_DISPLAY_DURATION):
     pygame.time.delay(duration)
 
 def build_message(message, text_color=(10, 10, 10)):
-    font = pygame.font.Font(consts.FONT_PATH, 36)
+    font = pygame.font.Font(font_path(consts.FONT_NAME), 36)
     return font.render(message, True, text_color)
+
+
+def image_path(filename):
+    return "gfx/" + filename
+
+def font_path(filename):
+    return "fonts/" + filename
 

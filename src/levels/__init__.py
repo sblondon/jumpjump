@@ -165,6 +165,19 @@ class Level(object):
                 _run = False
         return self.game
 
+    def create_slow_bouncing_ennemy(self, x, y):
+        ennemy = ennemies.SlowBouncingEnnemy(x, y)
+        self.ennemy_sprites.add(ennemy)
+
+    def create_fast_bouncing_ennemy(self, x, y):
+        ennemy = ennemies.FastBouncingEnnemy(x, y)
+        self.ennemy_sprites.add(ennemy)
+
+    def create_octopus(self, x, y):
+        target = self.red_player
+        ennemy = ennemies.Octopus(x, y, target)
+        self.ennemy_sprites.add(ennemy)
+
 
 class Level0(Level):
     def __init__(self, game):
@@ -175,10 +188,8 @@ class Level0(Level):
         self.create_goal(400, 400)
 
     def create_ennemies(self):
-        target = self.red_player
-        ennemy = ennemies.Octopus(250, 150, target)
-        #ennemy = ennemies.SlowBouncingEnnemy(250, 150)
-        self.ennemy_sprites.add(ennemy)
+        self.create_octopus(250, 150)
+        #self.create_slow_bouncing_ennemy(250, 150)
 
 
 class Level1(Level):
@@ -189,8 +200,7 @@ class Level1(Level):
         self.create_goal(500, 400)
 
     def create_ennemies(self):
-        ennemy = ennemies.FastBouncingEnnemy(50, 50)
-        self.ennemy_sprites.add(ennemy)
+        self.create_fast_bouncing_ennemy(50, 50)
 
 
 class Level2(Level):
@@ -201,10 +211,8 @@ class Level2(Level):
         self.create_goal(300, 350)
 
     def create_ennemies(self):
-        ennemy = ennemies.SlowBouncingEnnemy(250, 50)
-        self.ennemy_sprites.add(ennemy)
-        ennemy = ennemies.SlowBouncingEnnemy(450, 150)
-        self.ennemy_sprites.add(ennemy)
+        self.create_slow_bouncing_ennemy(250, 50)
+        self.create_slow_bouncing_ennemy(450, 150)
 
 
 def select_level(game):

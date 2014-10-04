@@ -3,7 +3,7 @@
 class Game(object):
     QUIT = "Quit"
     WIN = "Win"
-    LOSE = "LOSE"
+    LOSE = "Lose"
 
     def __init__(self):
         self.reset()

@@ -20,9 +20,6 @@ class BouncingEnnemy(pygame.sprite.Sprite):
         self._screen = pygame.display.get_surface()
 
     def update(self):
-        self._move()
-
-    def _move(self):
         self.rect = self.rect.move(self._speed)
         if self.rect.left < 0 or self.rect.right > self._screen.get_width():
             self._speed[0] *= -1

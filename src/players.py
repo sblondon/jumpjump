@@ -102,3 +102,4 @@ class Blue(Player):
 
     def __unicode__(self):
         return u"Blue player"
+

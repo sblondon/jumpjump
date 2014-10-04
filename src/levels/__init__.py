@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import abc
+import random
 
 import pygame.display
 import pygame.sprite
@@ -174,7 +175,7 @@ class Level(object):
         self.ennemy_sprites.add(ennemy)
 
     def create_octopus(self, x, y):
-        target = self.red_player
+        target = random.choice((self.red_player, self.blue_player))
         ennemy = ennemies.Octopus(x, y, target)
         self.ennemy_sprites.add(ennemy)
 

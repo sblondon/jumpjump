@@ -64,7 +64,7 @@ class Level(object):
         self.goal_sprites.update()
         self.goal_sprites.draw(self.screen)
       
-    def players_die(self):
+    def players_collisions(self):
         return pygame.sprite.groupcollide(
                 self.ennemy_sprites, self.player_sprites,
                 False, False,
@@ -154,15 +154,17 @@ class Level(object):
 
             pygame.time.delay(10)
 
-            if self.players_die():
-                _run = False
-                self.game.status = "Lose"
-                self.game.lives -= 1
+            collisions = self.players_collisions()
+            if collisions:
+                for c in collisions:
+                    c.touch_player(self.game)
 
             if self.players_win():
-                _run = False
                 self.game.status = "Win"
                 self.game.won_levels += 1
+
+            if self.game.status in ("Lose", "Win"):
+                _run = False
         return self.game
 
 
@@ -175,7 +177,9 @@ class Level0(Level):
         self.create_goal(400, 400)
 
     def create_ennemies(self):
-        ennemy = ennemies.SlowBouncingEnnemy(250, 150)
+        target = self.red_player
+        ennemy = ennemies.Octopus(250, 150, target)
+        #ennemy = ennemies.SlowBouncingEnnemy(250, 150)
         self.ennemy_sprites.add(ennemy)
 
 

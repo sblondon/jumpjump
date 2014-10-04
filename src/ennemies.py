@@ -30,7 +30,7 @@ class BouncingEnnemy(pygame.sprite.Sprite):
             self._speed[1] *= -1
 
     def touch_player(self, game):
-        game.status = "Lose"
+        game.status = game.LOSE
         game.lives -= 1
         
 

@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
 class Game(object):
+    QUIT = "Quit"
+    WIN = "Win"
+    LOSE = "LOSE"
+
     def __init__(self):
         self.reset()
 

@@ -142,7 +142,7 @@ class Level(object):
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         _run = False
-                        self.game.status = "Quit"
+                        self.game.status = self.game.QUIT
                     elif event.key in player_actions.keys():
                         player_actions[event.key]["start_action"]()
                 elif event.type == pygame.KEYUP:
@@ -154,16 +154,14 @@ class Level(object):
 
             pygame.time.delay(10)
 
-            collisions = self.players_collisions()
-            if collisions:
-                for c in collisions:
-                    c.touch_player(self.game)
+            for collision in self.players_collisions():
+                collision.touch_player(self.game)
 
             if self.players_win():
-                self.game.status = "Win"
+                self.game.status = self.game.WIN
                 self.game.won_levels += 1
 
-            if self.game.status in ("Lose", "Win"):
+            if self.game.status in (self.game.LOSE, self.game.WIN):
                 _run = False
         return self.game
 

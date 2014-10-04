@@ -23,13 +23,13 @@ def run():
         levels.introduce_level(game)
         level = levels.select_level(game)
         game = level.play()
-        if game.status == "Quit":
+        if game.status == game.QUIT:
             print("Bye")
             game.play_again = False
             game.status = None
-        elif game.status == "Win":
+        elif game.status == game.WIN:
             game.status = None
-        elif game.status == "Lose":
+        elif game.status == game.LOSE:
             game.status = None
             if game.lives == 0:
                 lose.display_lose_game(game)

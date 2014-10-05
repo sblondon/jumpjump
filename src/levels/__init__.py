@@ -180,6 +180,18 @@ class Level(object):
         self.ennemy_sprites.add(ennemy)
 
 
+class TestLevel(Level):
+    def __init__(self, game):
+        super(TestLevel, self).__init__(game, engine.image_path("background.png"))
+        self.create_ennemies()
+        self.create_platform(350, 50)
+        self.create_platform(350, 100)
+        self.create_goal(400, 400)
+
+    def create_ennemies(self):
+        self.create_octopus(250, 150)
+
+
 class Level0(Level):
     def __init__(self, game):
         super(Level0, self).__init__(game, engine.image_path("background.png"))
@@ -189,8 +201,7 @@ class Level0(Level):
         self.create_goal(400, 400)
 
     def create_ennemies(self):
-        self.create_octopus(250, 150)
-        #self.create_slow_bouncing_ennemy(250, 150)
+        self.create_slow_bouncing_ennemy(250, 150)
 
 
 class Level1(Level):

@@ -8,3 +8,6 @@ run:
 clean:
 	find . -name "*.pyc" -delete
 
+test:
+	sh ./src/run.sh test
+

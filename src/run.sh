@@ -1,4 +1,8 @@
 #! /bin/sh
-#env PYTHONPATH="." ./local.virtualenv/bin/python ./scripts/run.py
-env PYTHONPATH="." python2 ./src/run.py
+
+if [ "$#" -ne 1 ]; then
+    env PYTHONPATH="." python2 ./src/run.py
+else
+    env PYTHONPATH="." python2 ./src/testlevel.py
+fi
 

@@ -8,8 +8,13 @@ import pygame.sprite
 
 import engine
 
+class Killer(pygame.sprite.Sprite):
+    def touch_player(self, game):
+        game.status = game.LOSE
+        game.lives -= 1
 
-class BouncingEnnemy(pygame.sprite.Sprite):
+
+class BouncingEnnemy(Killer):
 
     def __init__(self, x, y, speed, image):
         super(BouncingEnnemy, self).__init__()
@@ -26,11 +31,6 @@ class BouncingEnnemy(pygame.sprite.Sprite):
             self._speed[0] *= -1
         if self.rect.top < 0 or self.rect.bottom > self._screen.get_height():
             self._speed[1] *= -1
-
-    def touch_player(self, game):
-        game.status = game.LOSE
-        game.lives -= 1
-        
 
 
 class SlowBouncingEnnemy(BouncingEnnemy):
@@ -115,7 +115,7 @@ class Ink(pygame.sprite.Sprite):
                 engine.image_path(self._image_filename())).convert_alpha()
 
 
-class Bird(pygame.sprite.Sprite):
+class Bird(Killer):
     def __init__(self, y):
         super(Bird, self).__init__()
         self._wings_up = True
@@ -144,8 +144,4 @@ class Bird(pygame.sprite.Sprite):
         image = "bird-0.png" if self._wings_up else "bird-1.png"
         return pygame.image.load(
                 engine.image_path(image)).convert_alpha()
-
-    def touch_player(self, game):
-        game.status = game.LOSE
-        game.lives -= 1
 

@@ -70,5 +70,7 @@ class Octopus(pygame.sprite.Sprite):
 
     def touch_player(self, game):
         if pygame.sprite.collide_mask(self, self.target):
+            for group in self.groups():
+                group.remove(self)
             print "Octopus touch!"
 

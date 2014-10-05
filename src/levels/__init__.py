@@ -15,7 +15,7 @@ import players
 class Level(object):
     def __init__(self, game, background_path):
         self.platform_sprites = pygame.sprite.Group()
-        self.player_sprites = pygame.sprite.Group()
+        self.player_sprites = pygame.sprite.RenderUpdates()
         self.ennemy_sprites = pygame.sprite.Group()
         self.goal_sprites = pygame.sprite.Group()
         self.background = None
@@ -38,9 +38,7 @@ class Level(object):
         self.screen.blit(self.background, (0, 0))
     
 
-
     def update(self):
-
         for sprite in self.player_sprites:
             self.screen.blit(self.background, sprite.rect, sprite.rect)
 
@@ -56,6 +54,7 @@ class Level(object):
         self.player_sprites.update()
         self.player_sprites.draw(self.screen)
 
+        self.ennemy_sprites.clear(self.screen, self.background)
         self.ennemy_sprites.update()
         self.ennemy_sprites.draw(self.screen)
 
@@ -155,8 +154,8 @@ class Level(object):
 
             pygame.time.delay(10)
 
-            for collision in self.players_collisions():
-                collision.touch_player(self.game)
+            for ennemy in self.players_collisions():
+                ennemy.touch_player(self.game)
 
             if self.players_win():
                 self.game.status = self.game.WIN

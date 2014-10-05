@@ -82,9 +82,11 @@ class Octopus(pygame.sprite.Sprite):
 
 class Ink(pygame.sprite.Sprite):
 
-    def __init__(self, x, y):
+    def __init__(self, center_x, center_y):
         super(Ink, self).__init__()
         self.image = pygame.image.load(engine.image_path("ink.png")).convert_alpha()
+        x = center_x - self.image.get_width()/2
+        y = center_y - self.image.get_height()/2
         self.rect = self.image.get_rect().move(x, y)
         self.mask = pygame.mask.from_surface(self.image)
 

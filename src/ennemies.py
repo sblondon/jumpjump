@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 
 import pygame.display
 import pygame.image
@@ -84,6 +85,7 @@ class Ink(pygame.sprite.Sprite):
 
     def __init__(self, center_x, center_y):
         super(Ink, self).__init__()
+        self.creation_datetime = datetime.datetime.now()
         self.image = pygame.image.load(engine.image_path("ink.png")).convert_alpha()
         x = center_x - self.image.get_width()/2
         y = center_y - self.image.get_height()/2
@@ -91,4 +93,8 @@ class Ink(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
 
         self._screen = pygame.display.get_surface()
+
+    def update(self):
+        if datetime.datetime.now() - self.creation_datetime > datetime.timedelta(seconds=10):
+            self.kill()
 

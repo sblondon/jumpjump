@@ -225,11 +225,25 @@ class Level2(Level):
         self.create_slow_bouncing_ennemy(250, 50)
         self.create_slow_bouncing_ennemy(450, 150)
 
+class Level3(Level):
+    def __init__(self, game):
+        super(Level3, self).__init__(game, engine.image_path("background.png"))
+        self.create_ennemies()
+        self.create_platform(250, 420)
+        self.create_goal(250, 300)
+        self.finalize_level()
+
+    def create_ennemies(self):
+        self.create_octopus(450, 50)
+        self.create_slow_bouncing_ennemy(250, 50)
+        self.create_slow_bouncing_ennemy(450, 150)
 
 def select_level(game):
     LVLS = {0: Level0,
             1: Level1,
-            2: Level2}
+            2: Level2,
+            3: Level3,
+            }
     HigherLevel = LVLS[max(LVLS.keys())]
     _Level = LVLS.get(game.won_levels, HigherLevel)
     return _Level(game)

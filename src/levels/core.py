@@ -162,6 +162,11 @@ class Level(object):
         ennemy = ennemies.Octopus(x, y, target, self)
         self.ennemy_sprites.add(ennemy)
 
+    def create_bird(self, y):
+        ennemy = ennemies.Bird(y)
+        self.ennemy_sprites.add(ennemy)
+
+
     def finalize_level(self):
         for platform in self.platform_sprites:
             self.all_sprites.add(platform)

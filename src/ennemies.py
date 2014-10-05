@@ -114,3 +114,38 @@ class Ink(pygame.sprite.Sprite):
         return pygame.image.load(
                 engine.image_path(self._image_filename())).convert_alpha()
 
+
+class Bird(pygame.sprite.Sprite):
+    def __init__(self, y):
+        super(Bird, self).__init__()
+        self._wings_up = True
+        self.image = self._set_image()
+        self.rect = self.image.get_rect().move(-50, y)
+        self.mask = pygame.mask.from_surface(self.image)
+        self._speed = [3, 0]
+        self._last_flap = datetime.datetime.now()
+
+        self._screen = pygame.display.get_surface()
+
+    def update(self):
+        self.rect = self.rect.move(self._speed)
+        self.flap()
+        if self.rect.left > self._screen.get_width():
+            self.kill()
+
+    def flap(self):
+        delay = datetime.timedelta(milliseconds=400)
+        if datetime.datetime.now() - self._last_flap > delay:
+            self._wings_up = not self._wings_up
+            self._last_flap = datetime.datetime.now()
+            self.image = self._set_image()
+
+    def _set_image(self):
+        image = "bird-0.png" if self._wings_up else "bird-1.png"
+        return pygame.image.load(
+                engine.image_path(image)).convert_alpha()
+
+    def touch_player(self, game):
+        game.status = game.LOSE
+        game.lives -= 1
+

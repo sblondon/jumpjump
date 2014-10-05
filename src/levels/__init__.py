@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import development
 import engine
 import progress    
 
@@ -19,5 +20,5 @@ def introduce_level(game):
     engine.display_simple_message(msg)
 
 def select_testlevel(game):
-    return progress.TestLevel(game)
+    return development.TestLevel(game)
 

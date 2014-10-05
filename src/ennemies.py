@@ -44,12 +44,13 @@ class FastBouncingEnnemy(BouncingEnnemy):
 
 class Octopus(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, target):
+    def __init__(self, x, y, target, level):
         super(Octopus, self).__init__()
         self.image = pygame.image.load(engine.image_path("octopus.png")).convert_alpha()
         self.rect = self.image.get_rect().move(x, y)
         self.mask = pygame.mask.from_surface(self.image)
         self.target = target
+        self.level = level
 
         self._screen = pygame.display.get_surface()
 
@@ -70,7 +71,21 @@ class Octopus(pygame.sprite.Sprite):
 
     def touch_player(self, game):
         if pygame.sprite.collide_mask(self, self.target):
-            for group in self.groups():
-                group.remove(self)
-            print "Octopus touch!"
+            self.create_ink()
+            self.kill()
+
+    def create_ink(self):
+        ink = Ink(self.rect.x, self.rect.y)
+        self.level.ink_sprites.add(ink)
+
+
+class Ink(pygame.sprite.Sprite):
+
+    def __init__(self, x, y):
+        super(Ink, self).__init__()
+        self.image = pygame.image.load(engine.image_path("ink.png")).convert_alpha()
+        self.rect = self.image.get_rect().move(x, y)
+        self.mask = pygame.mask.from_surface(self.image)
+
+        self._screen = pygame.display.get_surface()
 

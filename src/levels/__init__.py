@@ -18,6 +18,7 @@ class Level(object):
         self.player_sprites = pygame.sprite.RenderUpdates()
         self.ennemy_sprites = pygame.sprite.Group()
         self.goal_sprites = pygame.sprite.Group()
+        self.ink_sprites = pygame.sprite.RenderUpdates()
         self.background = None
         self.red_player = self.create_red_player()
         self.blue_player = self.create_blue_player()
@@ -51,6 +52,9 @@ class Level(object):
         for sprite in self.goal_sprites:
             self.screen.blit(self.background, sprite.rect, sprite.rect)
 
+        for sprite in self.ink_sprites:
+            self.screen.blit(self.background, sprite.rect, sprite.rect)
+
         self.player_sprites.update()
         self.player_sprites.draw(self.screen)
 
@@ -64,6 +68,10 @@ class Level(object):
         self.goal_sprites.update()
         self.goal_sprites.draw(self.screen)
       
+        self.ink_sprites.clear(self.screen, self.background)
+        self.ink_sprites.update()
+        self.ink_sprites.draw(self.screen)
+
     def players_collisions(self):
         return pygame.sprite.groupcollide(
                 self.ennemy_sprites, self.player_sprites,
@@ -175,7 +183,7 @@ class Level(object):
 
     def create_octopus(self, x, y):
         target = random.choice((self.red_player, self.blue_player))
-        ennemy = ennemies.Octopus(x, y, target)
+        ennemy = ennemies.Octopus(x, y, target, self)
         self.ennemy_sprites.add(ennemy)
 
 

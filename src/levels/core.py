@@ -166,7 +166,6 @@ class Level(object):
         ennemy = ennemies.Bird(y)
         self.ennemy_sprites.add(ennemy)
 
-
     def finalize_level(self):
         for platform in self.platform_sprites:
             self.all_sprites.add(platform)

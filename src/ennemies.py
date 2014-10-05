@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import math
 
 import pygame.display
 import pygame.image
@@ -122,19 +123,21 @@ class Bird(Killer):
         self.image = self._set_image()
         self.rect = self.image.get_rect().move(-50, y)
         self.mask = pygame.mask.from_surface(self.image)
-        self._speed = [3, 0]
+        self._x_speed = 3
         self._last_flap = datetime.datetime.now()
 
         self._screen = pygame.display.get_surface()
 
     def update(self):
-        self.rect = self.rect.move(self._speed)
+        y = 5 * math.cos(self.rect.x * 2)
+        speed = [self._x_speed, y]
+        self.rect = self.rect.move(speed)
         self.flap()
         if self.rect.left > self._screen.get_width():
             self.kill()
 
     def flap(self):
-        delay = datetime.timedelta(milliseconds=400)
+        delay = datetime.timedelta(milliseconds=300)
         if datetime.datetime.now() - self._last_flap > delay:
             self._wings_up = not self._wings_up
             self._last_flap = datetime.datetime.now()

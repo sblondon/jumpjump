@@ -18,11 +18,12 @@ class Level(object):
         self.player_sprites = pygame.sprite.RenderUpdates()
         self.ennemy_sprites = pygame.sprite.Group()
         self.goal_sprites = pygame.sprite.Group()
-        self.ink_sprites = pygame.sprite.RenderUpdates()
+        self.ink_sprites = pygame.sprite.Group()
         self.background = None
         self.red_player = self.create_red_player()
         self.blue_player = self.create_blue_player()
         self.goal = None
+        self.all_sprites = pygame.sprite.LayeredUpdates()
 
         self.screen = pygame.display.get_surface()
         self.game = game
@@ -40,37 +41,12 @@ class Level(object):
     
 
     def update(self):
-        for sprite in self.player_sprites:
+        for sprite in self.all_sprites:
             self.screen.blit(self.background, sprite.rect, sprite.rect)
 
-        for sprite in self.ennemy_sprites:
-            self.screen.blit(self.background, sprite.rect, sprite.rect)
-
-        for sprite in self.platform_sprites:
-            self.screen.blit(self.background, sprite.rect, sprite.rect)
-
-        for sprite in self.goal_sprites:
-            self.screen.blit(self.background, sprite.rect, sprite.rect)
-
-        for sprite in self.ink_sprites:
-            self.screen.blit(self.background, sprite.rect, sprite.rect)
-
-        self.player_sprites.update()
-        self.player_sprites.draw(self.screen)
-
-        self.ennemy_sprites.clear(self.screen, self.background)
-        self.ennemy_sprites.update()
-        self.ennemy_sprites.draw(self.screen)
-
-        self.platform_sprites.update()
-        self.platform_sprites.draw(self.screen)
-
-        self.goal_sprites.update()
-        self.goal_sprites.draw(self.screen)
-      
-        self.ink_sprites.clear(self.screen, self.background)
-        self.ink_sprites.update()
-        self.ink_sprites.draw(self.screen)
+        self.all_sprites.clear(self.screen, self.background)
+        self.all_sprites.update()
+        self.all_sprites.draw(self.screen)
 
     def players_collisions(self):
         return pygame.sprite.groupcollide(
@@ -186,6 +162,18 @@ class Level(object):
         ennemy = ennemies.Octopus(x, y, target, self)
         self.ennemy_sprites.add(ennemy)
 
+    def finalize_level(self):
+        for platform in self.platform_sprites:
+            self.all_sprites.add(platform)
+        self.all_sprites.add(self.goal)
+        self.all_sprites.add(self.blue_player)
+        self.all_sprites.add(self.red_player)
+        for ennemy in self.ennemy_sprites:
+            self.all_sprites.add(ennemy)
+        for ink in self.ink_sprites:
+            self.all_sprites.add(ink)
+
+        
 
 class TestLevel(Level):
     def __init__(self, game):
@@ -194,6 +182,7 @@ class TestLevel(Level):
         self.create_platform(350, 50)
         self.create_platform(350, 100)
         self.create_goal(400, 400)
+        self.finalize_level()
 
     def create_ennemies(self):
         self.create_octopus(250, 150)
@@ -206,6 +195,7 @@ class Level0(Level):
         self.create_platform(350, 50)
         self.create_platform(350, 100)
         self.create_goal(400, 400)
+        self.finalize_level()
 
     def create_ennemies(self):
         self.create_slow_bouncing_ennemy(250, 150)
@@ -217,6 +207,7 @@ class Level1(Level):
         self.create_ennemies()
         self.create_platform(300, 350)
         self.create_goal(500, 400)
+        self.finalize_level()
 
     def create_ennemies(self):
         self.create_fast_bouncing_ennemy(50, 50)
@@ -228,6 +219,7 @@ class Level2(Level):
         self.create_ennemies()
         self.create_platform(200, 420)
         self.create_goal(300, 350)
+        self.finalize_level()
 
     def create_ennemies(self):
         self.create_slow_bouncing_ennemy(250, 50)

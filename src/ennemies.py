@@ -77,6 +77,7 @@ class Octopus(pygame.sprite.Sprite):
     def create_ink(self):
         ink = Ink(self.rect.x, self.rect.y)
         self.level.ink_sprites.add(ink)
+        self.level.all_sprites.add(ink)
 
 
 class Ink(pygame.sprite.Sprite):

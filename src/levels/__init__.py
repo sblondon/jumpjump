@@ -10,6 +10,7 @@ def select_level(game):
             1: progress.Level1,
             2: progress.Level2,
             3: progress.Level3,
+            4: progress.Level4,
             }
     HigherLevel = LVLS[max(LVLS.keys())]
     _Level = LVLS.get(game.won_levels, HigherLevel)

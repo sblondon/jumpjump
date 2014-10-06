@@ -56,3 +56,17 @@ class Level3(Level):
         self.create_slow_bouncing_ennemy(250, 50)
         self.create_slow_bouncing_ennemy(450, 150)
 
+
+class Level4(Level):
+    def __init__(self, game):
+        super(Level4, self).__init__(game, engine.image_path("background.png"))
+        self.create_ennemies()
+        self.create_platform(250, 420)
+        self.create_goal(250, 300)
+        self.finalize_level()
+
+    def create_ennemies(self):
+        self.create_octopus(450, 50)
+        self.create_left_bird(250)
+        self.create_right_bird(320)
+

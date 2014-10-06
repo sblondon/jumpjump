@@ -10,16 +10,16 @@ import engine
 class Player(pygame.sprite.Sprite):
     def __init__(self, image_path, x):
         super(Player, self).__init__()
+        self._screen = pygame.display.get_surface()
+
         self.image = pygame.image.load(image_path).convert_alpha()
-        self.rect = self.image.get_rect().move(x, 150)
+        y = self._screen.get_height() - 70
+        self.rect = self.image.get_rect().move(x, y)
         self.mask = pygame.mask.from_surface(self.image)
         
         self._change_x = 0
         self._change_y = 0
-
         self.level = None
-        self._screen = pygame.display.get_surface()
-
 
     def update(self):
         self._gravity_effect()
@@ -98,7 +98,7 @@ class Red(Player):
 class Blue(Player):
 
     def __init__(self):
-        super(Blue, self).__init__(engine.image_path("person-blue.png"), x=100)
+        super(Blue, self).__init__(engine.image_path("person-blue.png"), x=600)
 
     def __unicode__(self):
         return u"Blue player"

@@ -118,6 +118,9 @@ class Ink(pygame.sprite.Sprite):
 
 
 class Bird(Killer):
+    X_OFFSET = 50
+    X_SPEED = 3
+
     def __init__(self, y, to_right=True):
         super(Bird, self).__init__()
         self._screen = pygame.display.get_surface()
@@ -125,10 +128,10 @@ class Bird(Killer):
         self._to_right = to_right
         self._wings_up = True
         self.image = self._set_image()
-        x_start = -50 if to_right else self._screen.get_width() + 50
+        x_start = -self.X_OFFSET if to_right else self._screen.get_width() + self.X_OFFSET
         self.rect = self.image.get_rect().move(x_start, y)
         self.mask = pygame.mask.from_surface(self.image)
-        self._x_speed = 3 if to_right else -3
+        self._x_speed = self.X_SPEED if to_right else -self.X_SPEED
         self._last_flap = datetime.datetime.now()
 
     @abc.abstractmethod

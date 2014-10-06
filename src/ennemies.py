@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import abc
 import datetime
 import math
 
@@ -117,24 +118,25 @@ class Ink(pygame.sprite.Sprite):
 
 
 class Bird(Killer):
-    def __init__(self, y):
+    def __init__(self, y, to_right=True):
         super(Bird, self).__init__()
-        self._wings_up = True
-        self.image = self._set_image()
-        self.rect = self.image.get_rect().move(-50, y)
-        self.mask = pygame.mask.from_surface(self.image)
-        self._x_speed = 3
-        self._last_flap = datetime.datetime.now()
-
         self._screen = pygame.display.get_surface()
 
+        self._to_right = to_right
+        self._wings_up = True
+        self.image = self._set_image()
+        x_start = -50 if to_right else self._screen.get_width() + 50
+        self.rect = self.image.get_rect().move(x_start, y)
+        self.mask = pygame.mask.from_surface(self.image)
+        self._x_speed = 3 if to_right else -3
+        self._last_flap = datetime.datetime.now()
+
+    @abc.abstractmethod
     def update(self):
         y = 5 * math.cos(self.rect.x * 2)
         speed = [self._x_speed, y]
         self.rect = self.rect.move(speed)
         self.flap()
-        if self.rect.left > self._screen.get_width():
-            self.kill()
 
     def flap(self):
         delay = datetime.timedelta(milliseconds=300)
@@ -145,6 +147,27 @@ class Bird(Killer):
 
     def _set_image(self):
         image = "bird-0.png" if self._wings_up else "bird-1.png"
-        return pygame.image.load(
+        surface = pygame.image.load(
                 engine.image_path(image)).convert_alpha()
+        return surface if self._to_right else pygame.transform.flip(surface, True, False)
+
+
+class LeftBird(Bird):
+    def __init__(self, y):
+        super(LeftBird, self).__init__(y, True)
+
+    def update(self):
+        super(LeftBird, self).update()
+        if self.rect.left > self._screen.get_width():
+            self.kill()
+
+
+class RightBird(Bird):
+    def __init__(self, y):
+        super(RightBird, self).__init__(y, False)
+
+    def update(self):
+        super(RightBird, self).update()
+        if self.rect.right < 0:
+            self.kill()
 

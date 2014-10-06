@@ -14,5 +14,6 @@ class TestLevel(Level):
         self.finalize_level()
 
     def create_ennemies(self):
-        self.create_bird(50)
+        self.create_left_bird(50)
+        self.create_right_bird(100)
 

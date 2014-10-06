@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import abc
-import random
 
 import pygame.display
 import pygame.sprite
@@ -74,7 +73,7 @@ class Level(object):
         return blue
 
     def create_platform(self, x, y):
-        platform = platforms.Platform()
+        platform = platforms.BasicPlatform()
         platform.rect.x = x
         platform.rect.y = y
         self.platform_sprites.add(platform)
@@ -158,8 +157,7 @@ class Level(object):
         self.ennemy_sprites.add(ennemy)
 
     def create_octopus(self, x, y):
-        target = random.choice((self.red_player, self.blue_player))
-        ennemy = ennemies.Octopus(x, y, target, self)
+        ennemy = ennemies.Octopus(x, y, self)
         self.ennemy_sprites.add(ennemy)
 
     def create_left_bird(self, y):
@@ -171,6 +169,12 @@ class Level(object):
         self.ennemy_sprites.add(ennemy)
         print ennemy
 
+    def create_octopus_platform(self, x, y):
+        platform = platforms.OctopusGeneratorPlatform(self)
+        platform.rect.x = x
+        platform.rect.y = y
+        self.platform_sprites.add(platform)
+        return platform
 
     def finalize_level(self):
         for platform in self.platform_sprites:

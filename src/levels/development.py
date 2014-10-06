@@ -9,7 +9,7 @@ class TestLevel(Level):
     def __init__(self, game):
         super(TestLevel, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
-        self.create_platform(350, 100)
+        self.create_octopus_platform(350, 100)
         self.create_goal(400, 400)
         self.finalize_level()
 

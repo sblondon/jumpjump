@@ -2,6 +2,7 @@
 import abc
 import datetime
 import math
+import random
 
 import pygame.display
 import pygame.image
@@ -9,6 +10,7 @@ import pygame.mask
 import pygame.sprite
 
 import engine
+
 
 class Killer(pygame.sprite.Sprite):
     def touch_player(self, game):
@@ -47,13 +49,13 @@ class FastBouncingEnnemy(BouncingEnnemy):
 
 class Octopus(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, target, level):
+    def __init__(self, x, y, level):
         super(Octopus, self).__init__()
         self.image = pygame.image.load(engine.image_path("octopus.png")).convert_alpha()
         self.rect = self.image.get_rect().move(x, y)
         self.mask = pygame.mask.from_surface(self.image)
-        self.target = target
         self.level = level
+        self.target = random.choice((self.level.red_player, self.level.blue_player))
 
         self._screen = pygame.display.get_surface()
 

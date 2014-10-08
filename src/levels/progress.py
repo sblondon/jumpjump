@@ -61,7 +61,7 @@ class Level4(Level):
     def __init__(self, game):
         super(Level4, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
-        self.create_default_platform(250, 420)
+        self.create_octopus_platform(250, 420)
         self.create_goal(250, 300)
         self.finalize_level()
 

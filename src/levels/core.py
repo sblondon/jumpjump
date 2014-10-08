@@ -83,6 +83,12 @@ class Level(object):
         self.goal_sprites.add(goal)
         return goal
 
+    def create_teleportable_goal(self, x, y):
+        goal = goals.Goal(x, y, self, True)
+        self.goal = goal
+        self.goal_sprites.add(goal)
+        return goal
+
     def play(self):
         player_actions = {
                 pygame.K_UP: {

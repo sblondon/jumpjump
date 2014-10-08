@@ -23,7 +23,7 @@ class Level1(Level):
         super(Level1, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
         self.create_default_platform(300, 350)
-        self.create_goal(500, 400)
+        self.create_teleportable_goal(500, 400)
         self.finalize_level()
 
     def create_ennemies(self):

@@ -72,8 +72,8 @@ class Level(object):
         self.player_sprites.add(blue)
         return blue
 
-    def create_platform(self, x, y):
-        platform = platforms.BasicPlatform()
+    def create_default_platform(self, x, y):
+        platform = platforms.DefaultPlatform()
         platform.rect.x = x
         platform.rect.y = y
         self.platform_sprites.add(platform)

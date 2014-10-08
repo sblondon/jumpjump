@@ -14,9 +14,9 @@ class Platform(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
 
-class BasicPlatform(Platform):
+class DefaultPlatform(Platform):
     def __init__(self):
-        super(BasicPlatform, self).__init__("basic-platform.png")
+        super(DefaultPlatform, self).__init__("default-platform.png")
 
 
 class OctopusGeneratorPlatform(Platform):

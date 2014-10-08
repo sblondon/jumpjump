@@ -8,16 +8,16 @@ import engine
 
 
 class Goal(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, y, level):
         super(Goal, self).__init__()
         self._IMAGES = {"blue": engine.image_path("goal-blue.png"), "red": engine.image_path("goal-red.png")}
         self._current_color = random.choice(self._IMAGES.keys())
         self.image = self._set_image()
-        self.rect = self.image.get_rect()
+        self.rect = self.image.get_rect().move(x, y)
         self._player_touch_done = 0
         self._player_touch_required = 3
 
-        self.level = None
+        self.level = level
 
     def update(self):
        if (pygame.sprite.collide_rect(self, self.level.red_player) and self._current_color == "red") or \

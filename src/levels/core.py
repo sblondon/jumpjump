@@ -73,17 +73,12 @@ class Level(object):
         return blue
 
     def create_default_platform(self, x, y):
-        platform = platforms.DefaultPlatform()
-        platform.rect.x = x
-        platform.rect.y = y
+        platform = platforms.DefaultPlatform(x, y)
         self.platform_sprites.add(platform)
         return platform
        
     def create_goal(self, x, y):
-        goal = goals.Goal()
-        goal.level = self
-        goal.rect.x = x
-        goal.rect.y = y
+        goal = goals.Goal(x, y, self)
         self.goal = goal
         self.goal_sprites.add(goal)
         return goal
@@ -167,12 +162,9 @@ class Level(object):
     def create_right_bird(self, y):
         ennemy = ennemies.RightBird(y)
         self.ennemy_sprites.add(ennemy)
-        print ennemy
 
     def create_octopus_platform(self, x, y):
-        platform = platforms.OctopusGeneratorPlatform(self)
-        platform.rect.x = x
-        platform.rect.y = y
+        platform = platforms.OctopusGeneratorPlatform(x, y, self)
         self.platform_sprites.add(platform)
         return platform
 

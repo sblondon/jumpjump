@@ -105,7 +105,6 @@ class Ink(pygame.sprite.Sprite):
         delay = datetime.timedelta(seconds=_seconds)
         if datetime.datetime.now() - self.creation_datetime > delay:
             if self.image_step < self.IMAGE_QTY - 1:
-                print self.image_step, self.IMAGE_QTY, self.image_step < self.IMAGE_QTY
                 self.image_step += 1
                 self.image = self._set_image()
             else:

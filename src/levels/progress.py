@@ -94,7 +94,6 @@ class RandomLevel(Level):
 
         self.finalize_level()
 
-
     def create_ennemies(self):
         for enn, qty in self._game.random_ennemies.items():
             for i in range(qty):

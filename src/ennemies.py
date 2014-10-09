@@ -18,10 +18,10 @@ class Killer(pygame.sprite.Sprite):
         game.lives -= 1
 
 
-class BouncingEnnemy(Killer):
+class Fantom(Killer):
 
     def __init__(self, x, y, speed, image):
-        super(BouncingEnnemy, self).__init__()
+        super(Fantom, self).__init__()
         self.image = pygame.image.load(image).convert_alpha()
         self.rect = self.image.get_rect().move(x, y)
         self.mask = pygame.mask.from_surface(self.image)
@@ -37,14 +37,14 @@ class BouncingEnnemy(Killer):
             self._speed[1] *= -1
 
 
-class SlowBouncingEnnemy(BouncingEnnemy):
+class SlowFantom(Fantom):
     def __init__(self, x, y):
-        super(SlowBouncingEnnemy, self).__init__(x, y, [1, 1], engine.image_path("slow-bouncing.png"))
+        super(SlowFantom, self).__init__(x, y, [1, 1], engine.image_path("slow-fantom.png"))
 
 
-class FastBouncingEnnemy(BouncingEnnemy):
+class FastFantom(Fantom):
     def __init__(self, x, y):
-        super(FastBouncingEnnemy, self).__init__(x, y, [2, 2], engine.image_path("fast-bouncing.png"))
+        super(FastFantom, self).__init__(x, y, [2, 2], engine.image_path("fast-fantom.png"))
 
 
 class Octopus(pygame.sprite.Sprite):

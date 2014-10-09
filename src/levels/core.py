@@ -150,11 +150,11 @@ class Level(object):
         return self.game
 
     def create_slow_bouncing_ennemy(self, x, y):
-        ennemy = ennemies.SlowBouncingEnnemy(x, y)
+        ennemy = ennemies.SlowFantom(x, y)
         self.ennemy_sprites.add(ennemy)
 
     def create_fast_bouncing_ennemy(self, x, y):
-        ennemy = ennemies.FastBouncingEnnemy(x, y)
+        ennemy = ennemies.FastFantom(x, y)
         self.ennemy_sprites.add(ennemy)
 
     def create_octopus(self, x, y):

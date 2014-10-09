@@ -13,4 +13,11 @@ class Game(object):
         self.lives = 3
         self.play_again = True
         self.status = None
+        self.random_ennemies = {
+                "slow": 0,
+                "fast": 0,
+                "octopus": 1,
+                "left": 1,
+                "right": 0,
+                }
 

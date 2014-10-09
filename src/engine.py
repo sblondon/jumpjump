@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os.path
 
 import pygame.font
 import pygame.time
@@ -28,8 +29,8 @@ def build_message(message, text_color=(10, 10, 10)):
 
 
 def image_path(filename):
-    return "assets/gfx/" + filename
+    return os.path.join("assets", "gfx", filename)
 
 def font_path(filename):
-    return "assets/fonts/" + filename
+    return os.path.join("assets", "fonts", filename)
 

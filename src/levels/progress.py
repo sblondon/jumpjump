@@ -100,6 +100,19 @@ class RandomLevel(Level):
         self.create_left_bird(250)
         self.create_right_bird(320)
         for index in range(self._game.won_levels - len(LVLS)):
-            x = random.randint(0, self._screen.get_width() - 50)
-            self.create_slow_bouncing_ennemy(x, 50)
-
+            enn = random.choice( ("slow", "fast", "octopus", "left", "right"))
+            if enn == "slow":
+                x = random.randint(0, self._screen.get_width() - 50)
+                self.create_slow_bouncing_ennemy(x, 50)
+            elif enn == "fast":
+                x = random.randint(0, self._screen.get_width() - 50)
+                self.create_fast_bouncing_ennemy(x, 50)
+            elif enn == "octopus":
+                x = random.randint(0, self._screen.get_width() - 50)
+                self.create_octopus(x, 150)
+            elif enn == "left":
+                y = random.randint(0, self._screen.get_height() - 100)
+                self.create_left_bird(y)
+            elif enn == "right":
+                y = random.randint(0, self._screen.get_height() - 100)
+                self.create_right_bird(y)

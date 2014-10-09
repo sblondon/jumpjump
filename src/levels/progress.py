@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import random
+
+import pygame.display
 
 import engine
 
@@ -69,4 +72,34 @@ class Level4(Level):
         self.create_octopus(450, 50)
         self.create_left_bird(250)
         self.create_right_bird(320)
+
+
+LVLS = {0: Level0,
+        1: Level1,
+        2: Level2,
+        3: Level3,
+        4: Level4,
+        }
+
+
+class RandomLevel(Level):
+    def __init__(self, game):
+        super(RandomLevel, self).__init__(game, engine.image_path("background.png"))
+        self._game = game
+        self._screen = pygame.display.get_surface()
+        self.create_ennemies()
+        self.create_octopus_platform(250, 420)
+        goal = self.create_goal(250, 300)
+        goal.player_touch_required = self._game.won_levels
+
+        self.finalize_level()
+
+
+    def create_ennemies(self):
+        self.create_octopus(450, 50)
+        self.create_left_bird(250)
+        self.create_right_bird(320)
+        for index in range(self._game.won_levels - len(LVLS)):
+            x = random.randint(0, self._screen.get_width() - 50)
+            self.create_slow_bouncing_ennemy(x, 50)
 

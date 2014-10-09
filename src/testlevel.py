@@ -14,6 +14,7 @@ def run():
     screen = pygame.display.set_mode(WINDOW_SIZE)
 
     game = games.Game()
+    game.won_levels +=1
     level = levels.select_testlevel(game)
     game = level.play()
 

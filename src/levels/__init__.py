@@ -6,14 +6,8 @@ import progress
 
 
 def select_level(game):
-    LVLS = {0: progress.Level0,
-            1: progress.Level1,
-            2: progress.Level2,
-            3: progress.Level3,
-            4: progress.Level4,
-            }
-    HigherLevel = LVLS[max(LVLS.keys())]
-    _Level = LVLS.get(game.won_levels, HigherLevel)
+    LVLS = progress.LVLS
+    _Level = LVLS.get(game.won_levels, progress.RandomLevel)
     return _Level(game)
 
 def introduce_level(game):

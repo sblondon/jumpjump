@@ -15,7 +15,7 @@ class Goal(pygame.sprite.Sprite):
         self.image = self._set_image()
         self.rect = self.image.get_rect().move(x, y)
         self._player_touch_done = 0
-        self._player_touch_required = 3
+        self.player_touch_required = 3
         self._teleport = teleport
 
         self.level = level
@@ -37,5 +37,5 @@ class Goal(pygame.sprite.Sprite):
         return pygame.image.load(self._IMAGES[self._current_color]).convert_alpha()
 
     def reached(self):
-        return self._player_touch_done >= self._player_touch_required
+        return self._player_touch_done >= self.player_touch_required
 

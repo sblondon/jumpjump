@@ -18,7 +18,7 @@ class Level0(Level):
         self.finalize_level()
 
     def create_ennemies(self):
-        self.create_slow_bouncing_ennemy(250, 150)
+        self.create_slow_fantom(250, 150)
 
 
 class Level1(Level):
@@ -30,7 +30,7 @@ class Level1(Level):
         self.finalize_level()
 
     def create_ennemies(self):
-        self.create_fast_bouncing_ennemy(50, 50)
+        self.create_fast_fantom(50, 50)
 
 
 class Level2(Level):
@@ -42,8 +42,8 @@ class Level2(Level):
         self.finalize_level()
 
     def create_ennemies(self):
-        self.create_slow_bouncing_ennemy(250, 50)
-        self.create_slow_bouncing_ennemy(450, 150)
+        self.create_slow_fantom(250, 50)
+        self.create_slow_fantom(450, 150)
 
 
 class Level3(Level):
@@ -56,8 +56,8 @@ class Level3(Level):
 
     def create_ennemies(self):
         self.create_octopus(450, 50)
-        self.create_slow_bouncing_ennemy(250, 50)
-        self.create_slow_bouncing_ennemy(450, 150)
+        self.create_slow_fantom(250, 50)
+        self.create_slow_fantom(450, 150)
 
 
 class Level4(Level):
@@ -106,10 +106,10 @@ class RandomLevel(Level):
     def create_ennemy(self, enn):
        if enn == "slow":
            x = random.randint(0, self._screen.get_width() - 50)
-           self.create_slow_bouncing_ennemy(x, 50)
+           self.create_slow_fantom(x, 50)
        elif enn == "fast":
            x = random.randint(0, self._screen.get_width() - 50)
-           self.create_fast_bouncing_ennemy(x, 50)
+           self.create_fast_fantom(x, 50)
        elif enn == "octopus":
            x = random.randint(0, self._screen.get_width() - 50)
            self.create_octopus(x, 150)

@@ -149,11 +149,11 @@ class Level(object):
                 _run = False
         return self.game
 
-    def create_slow_bouncing_ennemy(self, x, y):
+    def create_slow_fantom(self, x, y):
         ennemy = ennemies.SlowFantom(x, y)
         self.ennemy_sprites.add(ennemy)
 
-    def create_fast_bouncing_ennemy(self, x, y):
+    def create_fast_fantom(self, x, y):
         ennemy = ennemies.FastFantom(x, y)
         self.ennemy_sprites.add(ennemy)
 

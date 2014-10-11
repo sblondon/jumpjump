@@ -29,13 +29,13 @@ class Goal(pygame.sprite.Sprite):
            (pygame.sprite.collide_rect(self, self.level.blue_player) \
                 and self._current_color == "blue" \
                 and not self.level.blue_player.on_goal_previous_loop):
-           self._player_touch_done += 1
-           self._current_color = "blue" if self._current_color == "red" else "red"
-           self.image = self._set_image()
-           if self._teleport:
+            self._player_touch_done += 1
+            self._current_color = "blue" if self._current_color == "red" else "red"
+            self.image = self._set_image()
+            if self._teleport:
                 x = random.randint(0, self._max_teleportable_x)
                 self.rect = self.image.get_rect().move(x, self.rect.y)
-    
+
         if pygame.sprite.collide_rect(self, self.level.red_player):
            self.level.red_player.on_goal_previous_loop = True
         else:

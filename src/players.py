@@ -16,6 +16,7 @@ class Player(pygame.sprite.Sprite):
         y = self._screen.get_height() - 70
         self.rect = self.image.get_rect().move(x, y)
         self.mask = pygame.mask.from_surface(self.image)
+        self.on_goal_previous_loop = False
         
         self._change_x = 0
         self._change_y = 0

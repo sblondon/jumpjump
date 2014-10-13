@@ -2,7 +2,7 @@
 
 import engine
 
-from core import Level
+from core import BaseLevel
 from progress import RandomLevel
 
 

@@ -7,19 +7,19 @@ import engine
 import ennemies
 
 
-class Platform(pygame.sprite.Sprite):
+class BasePlatform(pygame.sprite.Sprite):
     def __init__(self, x, y, image_filename):
-        super(Platform, self).__init__()
+        super(BasePlatform, self).__init__()
         self.image = pygame.image.load(engine.image_path(image_filename)).convert_alpha()
         self.rect = self.image.get_rect().move(x, y)
 
 
-class DefaultPlatform(Platform):
+class DefaultPlatform(BasePlatform):
     def __init__(self, x, y):
         super(DefaultPlatform, self).__init__(x, y, "default-platform.png")
 
 
-class OctopusGeneratorPlatform(Platform):
+class OctopusGeneratorPlatform(BasePlatform):
     def __init__(self, x, y, level):
         super(OctopusGeneratorPlatform, self).__init__(x, y, "octopus-platform.png")
         self.last_generation = datetime.datetime.now()

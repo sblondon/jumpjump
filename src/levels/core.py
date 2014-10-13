@@ -11,7 +11,7 @@ import platforms
 import players
 
 
-class Level(object):
+class BaseLevel(object):
     def __init__(self, game, background_path):
         self.platform_sprites = pygame.sprite.Group()
         self.player_sprites = pygame.sprite.RenderUpdates()

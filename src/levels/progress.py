@@ -5,10 +5,10 @@ import pygame.display
 
 import engine
 
-from core import Level
+from core import BaseLevel
 
 
-class Level0(Level):
+class Level0(BaseLevel):
     def __init__(self, game):
         super(Level0, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
@@ -21,7 +21,7 @@ class Level0(Level):
         self.create_slow_fantom(250, 150)
 
 
-class Level1(Level):
+class Level1(BaseLevel):
     def __init__(self, game):
         super(Level1, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
@@ -33,7 +33,7 @@ class Level1(Level):
         self.create_fast_fantom(50, 50)
 
 
-class Level2(Level):
+class Level2(BaseLevel):
     def __init__(self, game):
         super(Level2, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
@@ -46,7 +46,7 @@ class Level2(Level):
         self.create_slow_fantom(450, 150)
 
 
-class Level3(Level):
+class Level3(BaseLevel):
     def __init__(self, game):
         super(Level3, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
@@ -60,7 +60,7 @@ class Level3(Level):
         self.create_slow_fantom(450, 150)
 
 
-class Level4(Level):
+class Level4(BaseLevel):
     def __init__(self, game):
         super(Level4, self).__init__(game, engine.image_path("background.png"))
         self.create_ennemies()
@@ -82,7 +82,7 @@ LVLS = {0: Level0,
         }
 
 
-class RandomLevel(Level):
+class RandomLevel(BaseLevel):
     def __init__(self, game):
         super(RandomLevel, self).__init__(game, engine.image_path("background.png"))
         self._game = game

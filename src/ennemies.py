@@ -12,16 +12,16 @@ import pygame.sprite
 import engine
 
 
-class Killer(pygame.sprite.Sprite):
+class BaseKiller(pygame.sprite.Sprite):
     def touch_player(self, game):
         game.status = game.LOSE
         game.lives -= 1
 
 
-class Fantom(Killer):
+class BaseFantom(BaseKiller):
 
     def __init__(self, x, y, speed, image):
-        super(Fantom, self).__init__()
+        super(BaseFantom, self).__init__()
         self.image = pygame.image.load(image).convert_alpha()
         self.rect = self.image.get_rect().move(x, y)
         self.mask = pygame.mask.from_surface(self.image)
@@ -37,12 +37,12 @@ class Fantom(Killer):
             self._speed[1] *= -1
 
 
-class SlowFantom(Fantom):
+class SlowFantom(BaseFantom):
     def __init__(self, x, y):
         super(SlowFantom, self).__init__(x, y, [1, 1], engine.image_path("slow-fantom.png"))
 
 
-class FastFantom(Fantom):
+class FastFantom(BaseFantom):
     def __init__(self, x, y):
         super(FastFantom, self).__init__(x, y, [2, 2], engine.image_path("fast-fantom.png"))
 
@@ -118,12 +118,12 @@ class Ink(pygame.sprite.Sprite):
                 engine.image_path(self._image_filename())).convert_alpha()
 
 
-class Bird(Killer):
+class BaseBird(BaseKiller):
     X_OFFSET = 50
     X_SPEED = 3
 
     def __init__(self, y, to_right=True):
-        super(Bird, self).__init__()
+        super(BaseBird, self).__init__()
         self._screen = pygame.display.get_surface()
 
         self._to_right = to_right
@@ -156,7 +156,7 @@ class Bird(Killer):
         return surface if self._to_right else pygame.transform.flip(surface, True, False)
 
 
-class LeftBird(Bird):
+class LeftBird(BaseBird):
     def __init__(self, y):
         super(LeftBird, self).__init__(y, True)
 
@@ -166,7 +166,7 @@ class LeftBird(Bird):
             self.kill()
 
 
-class RightBird(Bird):
+class RightBird(BaseBird):
     def __init__(self, y):
         super(RightBird, self).__init__(y, False)
 

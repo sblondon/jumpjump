@@ -16,7 +16,7 @@ def run():
 
     screen = pygame.display.set_mode(WINDOW_SIZE)
 
-    engine.display_simple_message("JumpJump", duration=consts.SHORT_DISPLAY_DURATION)
+    engine.display_simple_message("Jumping Jack Python", duration=consts.SHORT_DISPLAY_DURATION)
 
     game = games.Game()
     while game.play_again:

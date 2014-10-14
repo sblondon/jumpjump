@@ -10,7 +10,7 @@ from core import BaseLevel
 
 class Level0(BaseLevel):
     def __init__(self, game):
-        super(Level0, self).__init__(game, engine.image_path("background.png"))
+        super(Level0, self).__init__(game, engine.background_path("wall.png"))
         self.create_ennemies()
         self.create_default_platform(350, 50)
         self.create_default_platform(350, 100)
@@ -23,7 +23,7 @@ class Level0(BaseLevel):
 
 class Level1(BaseLevel):
     def __init__(self, game):
-        super(Level1, self).__init__(game, engine.image_path("background.png"))
+        super(Level1, self).__init__(game, engine.background_path("bridge.png"))
         self.create_ennemies()
         self.create_default_platform(300, 350)
         self.create_teleportable_goal(500, 400)
@@ -35,7 +35,7 @@ class Level1(BaseLevel):
 
 class Level2(BaseLevel):
     def __init__(self, game):
-        super(Level2, self).__init__(game, engine.image_path("background.png"))
+        super(Level2, self).__init__(game, engine.background_path("desert-1.png"))
         self.create_ennemies()
         self.create_default_platform(200, 420)
         self.create_goal(300, 350)
@@ -48,7 +48,7 @@ class Level2(BaseLevel):
 
 class Level3(BaseLevel):
     def __init__(self, game):
-        super(Level3, self).__init__(game, engine.image_path("background.png"))
+        super(Level3, self).__init__(game, engine.background_path("desert-2.png"))
         self.create_ennemies()
         self.create_default_platform(250, 420)
         self.create_goal(250, 300)
@@ -62,7 +62,7 @@ class Level3(BaseLevel):
 
 class Level4(BaseLevel):
     def __init__(self, game):
-        super(Level4, self).__init__(game, engine.image_path("background.png"))
+        super(Level4, self).__init__(game, engine.background_path("wall.png"))
         self.create_ennemies()
         self.create_octopus_platform(250, 420)
         self.create_goal(250, 300)
@@ -84,7 +84,7 @@ LVLS = {0: Level0,
 
 class RandomLevel(BaseLevel):
     def __init__(self, game):
-        super(RandomLevel, self).__init__(game, engine.image_path("background.png"))
+        super(RandomLevel, self).__init__(game, engine.background_path("desert-2.png"))
         self._game = game
         self._screen = pygame.display.get_surface()
         self.create_ennemies()

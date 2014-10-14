@@ -31,8 +31,11 @@ def build_message(message, text_color=(10, 10, 10)):
 def image_path(filename):
     return os.path.join("assets", "gfx", filename)
 
+def background_dir():
+    return os.path.join("assets", "gfx/backgrounds/")
+
 def background_path(filename):
-    return os.path.join("assets", "gfx/backgrounds/", filename)
+    return os.path.join(background_dir(), filename)
 
 def font_path(filename):
     return os.path.join("assets", "fonts", filename)

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import random
 
 import pygame.display
@@ -84,7 +85,9 @@ LVLS = {0: Level0,
 
 class RandomLevel(BaseLevel):
     def __init__(self, game):
-        super(RandomLevel, self).__init__(game, engine.background_path("desert-2.png"))
+        backgrounds = os.listdir(engine.background_dir())
+        background_filename = random.choice(backgrounds)
+        super(RandomLevel, self).__init__(game, engine.background_path(background_filename))
         self._game = game
         self._screen = pygame.display.get_surface()
         self.create_ennemies()

@@ -16,7 +16,7 @@ class Level0(BaseLevel):
         self.create_slow_fantom(250, 150)
 
     def create_platforms(self):
-        platformsbuilder.level0_builder(self)
+        platformsbuilder.platform0_builder(self)
 
 
 class Level1(BaseLevel):
@@ -26,7 +26,7 @@ class Level1(BaseLevel):
         self.create_fast_fantom(50, 50)
 
     def create_platforms(self):
-        platformsbuilder.level1_builder(self)
+        platformsbuilder.platform1_builder(self)
 
 
 class Level2(BaseLevel):
@@ -37,7 +37,7 @@ class Level2(BaseLevel):
         self.create_slow_fantom(450, 150)
 
     def create_platforms(self):
-        platformsbuilder.level2_builder(self)
+        platformsbuilder.platform2_builder(self)
 
 
 class Level3(BaseLevel):
@@ -49,7 +49,7 @@ class Level3(BaseLevel):
         self.create_slow_fantom(450, 150)
 
     def create_platforms(self):
-        platformsbuilder.level3_builder(self)
+        platformsbuilder.platform3_builder(self)
 
 
 class Level4(BaseLevel):
@@ -61,7 +61,7 @@ class Level4(BaseLevel):
         self.create_right_bird(320)
 
     def create_platforms(self):
-        platformsbuilder.level4_builder(self)
+        platformsbuilder.platform4_builder(self)
 
 
 

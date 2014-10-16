@@ -20,9 +20,11 @@ class BaseKiller(pygame.sprite.Sprite):
 
 class BaseFantom(BaseKiller):
 
-    def __init__(self, x, y, speed, image):
+    def __init__(self, x, y, speed, image_to_left, image_to_right):
         super(BaseFantom, self).__init__()
-        self.image = pygame.image.load(image).convert_alpha()
+        self._image_to_left = pygame.image.load(image_to_left).convert_alpha()
+        self._image_to_right = pygame.image.load(image_to_right).convert_alpha()
+        self.image = self._image_to_right
         self.rect = self.image.get_rect().move(x, y)
         self.mask = pygame.mask.from_surface(self.image)
         self._speed = speed
@@ -36,15 +38,28 @@ class BaseFantom(BaseKiller):
         if self.rect.top < 0 or self.rect.bottom > self._screen.get_height():
             self._speed[1] *= -1
 
+        if self._speed[0] > 0:
+            self.image = self._image_to_right
+        else:
+            self.image = self._image_to_left
+
 
 class SlowFantom(BaseFantom):
     def __init__(self, x, y):
-        super(SlowFantom, self).__init__(x, y, [1, 1], engine.image_path("slow-fantom.png"))
+        super(SlowFantom, self).__init__(
+                x, y,
+                [1, 1],
+                engine.image_path("slow-fantom-to-left.png"),
+                engine.image_path("slow-fantom-to-right.png"))
 
 
 class FastFantom(BaseFantom):
     def __init__(self, x, y):
-        super(FastFantom, self).__init__(x, y, [2, 2], engine.image_path("fast-fantom.png"))
+        super(FastFantom, self).__init__(
+                x, y,
+                [2, 2],
+                engine.image_path("fast-fantom-to-left.png"),
+                engine.image_path("fast-fantom-to-right.png"))
 
 
 class Octopus(pygame.sprite.Sprite):

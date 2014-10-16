@@ -122,3 +122,4 @@ class RandomLevel(BaseLevel):
        elif enn == self._game.RIGHT_BIRD:
            y = random.randint(0, self._screen.get_height() - 100)
            self.create_right_bird(y)
+

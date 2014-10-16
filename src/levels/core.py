@@ -18,7 +18,6 @@ class BaseLevel(object):
         self.ennemy_sprites = pygame.sprite.Group()
         self.goal_sprites = pygame.sprite.Group()
         self.ink_sprites = pygame.sprite.Group()
-        self.background = None
         self.red_player = self.create_red_player()
         self.blue_player = self.create_blue_player()
         self.goal = None

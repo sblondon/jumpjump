@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import os
 import random
 
@@ -87,13 +88,13 @@ class RandomLevel(BaseLevel):
     def create_ennemies(self):
         for enn, qty in self.game.random_ennemies.items():
             for i in range(qty):
-                self.create_ennemy(enn)
+                self._create_ennemy(enn)
 
         enn = random.choice( self.game.random_ennemies.keys() )
-        self.create_ennemy(enn)
+        self._create_ennemy(enn)
         self.game.random_ennemies[enn] += 1
 
-    def create_ennemy(self, enn):
+    def _create_ennemy(self, enn):
        if enn == self.game.SLOW_FANTOM:
            x = random.randint(0, self.screen.get_width() - 50)
            self.create_slow_fantom(x, 50)

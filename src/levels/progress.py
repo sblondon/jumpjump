@@ -107,18 +107,18 @@ class RandomLevel(BaseLevel):
         self._game.random_ennemies[enn] += 1
 
     def create_ennemy(self, enn):
-       if enn == "slow":
+       if enn == self._game.SLOW_FANTOM:
            x = random.randint(0, self._screen.get_width() - 50)
            self.create_slow_fantom(x, 50)
-       elif enn == "fast":
+       elif enn == self._game.FAST_FANTOM:
            x = random.randint(0, self._screen.get_width() - 50)
            self.create_fast_fantom(x, 50)
-       elif enn == "octopus":
+       elif enn == self._game.OCTOPUS:
            x = random.randint(0, self._screen.get_width() - 50)
            self.create_octopus(x, 150)
-       elif enn == "left":
+       elif enn == self._game.LEFT_BIRD:
            y = random.randint(0, self._screen.get_height() - 100)
            self.create_left_bird(y)
-       elif enn == "right":
+       elif enn == self._game.RIGHT_BIRD:
            y = random.randint(0, self._screen.get_height() - 100)
            self.create_right_bird(y)

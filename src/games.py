@@ -5,6 +5,12 @@ class Game(object):
     WIN = "Win"
     LOSE = "Lose"
 
+    SLOW_FANTOM = "slow"
+    FAST_FANTOM = "fast"
+    OCTOPUS = "octopus"
+    LEFT_BIRD = "left"
+    RIGHT_BIRD = "right"
+
     def __init__(self):
         self.reset()
 
@@ -14,10 +20,10 @@ class Game(object):
         self.play_again = True
         self.status = None
         self.random_ennemies = {
-                "slow": 0,
-                "fast": 0,
-                "octopus": 1,
-                "left": 1,
-                "right": 0,
+                self.SLOW_FANTOM: 0,
+                self.FAST_FANTOM: 0,
+                self.OCTOPUS: 1,
+                self.LEFT_BIRD: 1,
+                self.RIGHT_BIRD : 0,
                 }
 

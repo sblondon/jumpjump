@@ -90,12 +90,14 @@ class RandomLevel(BaseLevel):
         super(RandomLevel, self).__init__(game, engine.background_path(background_filename))
         self._game = game
         self._screen = pygame.display.get_surface()
+        self.create_platforms()
         self.create_ennemies()
+        self.finalize_level()
+
+    def create_platforms(self):
         self.create_octopus_platform(250, 420)
         goal = self.create_goal(250, 300)
         goal.player_touch_required = self._game.won_levels
-
-        self.finalize_level()
 
     def create_ennemies(self):
         for enn, qty in self._game.random_ennemies.items():

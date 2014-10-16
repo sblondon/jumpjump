@@ -27,5 +27,5 @@ def level4_builder(level):
 def random_builder(level):
     level.create_octopus_platform(250, 420)
     goal = level.create_goal(250, 300)
-    goal.player_touch_required = level._game.won_levels
+    goal.player_touch_required = level.game.won_levels
 

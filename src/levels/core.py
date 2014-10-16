@@ -12,7 +12,7 @@ import players
 
 
 class BaseLevel(object):
-    def __init__(self, game, background_path):
+    def __init__(self, game):
         self.platform_sprites = pygame.sprite.Group()
         self.player_sprites = pygame.sprite.RenderUpdates()
         self.ennemy_sprites = pygame.sprite.Group()
@@ -27,7 +27,7 @@ class BaseLevel(object):
         self.screen = pygame.display.get_surface()
         self.game = game
 
-        self.background = pygame.image.load(background_path).convert()
+        self.background = pygame.image.load(self.BACKGROUND_PATH).convert()
         TEXT_COLOR = (200, 0, 0)
         hearts = u"♥" * game.lives
         text = engine.build_message(hearts, TEXT_COLOR)
@@ -37,6 +37,10 @@ class BaseLevel(object):
         self.background.blit(text, textpos)
     
         self.screen.blit(self.background, (0, 0))
+
+        self.create_ennemies()
+        self.create_platforms()
+        self.finalize_level()
     
 
     def update(self):

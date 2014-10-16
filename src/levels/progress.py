@@ -7,52 +7,56 @@ import pygame.display
 import engine
 
 from core import BaseLevel
-
+import platformsbuilder
 
 class Level0(BaseLevel):
     def __init__(self, game):
         super(Level0, self).__init__(game, engine.background_path("wall.png"))
         self.create_ennemies()
-        self.create_default_platform(350, 50)
-        self.create_default_platform(350, 100)
-        self.create_goal(400, 400)
+        self.create_platforms()
         self.finalize_level()
 
     def create_ennemies(self):
         self.create_slow_fantom(250, 150)
+
+    def create_platforms(self):
+        platformsbuilder.level0_builder(self)
 
 
 class Level1(BaseLevel):
     def __init__(self, game):
         super(Level1, self).__init__(game, engine.background_path("bridge.png"))
         self.create_ennemies()
-        self.create_default_platform(300, 350)
-        self.create_teleportable_goal(500, 400)
+        self.create_platforms()
         self.finalize_level()
 
     def create_ennemies(self):
         self.create_fast_fantom(50, 50)
+
+    def create_platforms(self):
+        platformsbuilder.level1_builder(self)
 
 
 class Level2(BaseLevel):
     def __init__(self, game):
         super(Level2, self).__init__(game, engine.background_path("desert-1.png"))
         self.create_ennemies()
-        self.create_default_platform(200, 420)
-        self.create_goal(300, 350)
+        self.create_platforms()
         self.finalize_level()
 
     def create_ennemies(self):
         self.create_slow_fantom(250, 50)
         self.create_slow_fantom(450, 150)
+
+    def create_platforms(self):
+        platformsbuilder.level2_builder(self)
 
 
 class Level3(BaseLevel):
     def __init__(self, game):
         super(Level3, self).__init__(game, engine.background_path("desert-2.png"))
         self.create_ennemies()
-        self.create_default_platform(250, 420)
-        self.create_goal(250, 300)
+        self.create_platforms()
         self.finalize_level()
 
     def create_ennemies(self):
@@ -60,19 +64,27 @@ class Level3(BaseLevel):
         self.create_slow_fantom(250, 50)
         self.create_slow_fantom(450, 150)
 
+    def create_platforms(self):
+        platformsbuilder.level3_builder(self)
+
 
 class Level4(BaseLevel):
     def __init__(self, game):
         super(Level4, self).__init__(game, engine.background_path("wall.png"))
         self.create_ennemies()
-        self.create_octopus_platform(250, 420)
-        self.create_goal(250, 300)
+        self.create_platforms()
+        #self.create_octopus_platform(250, 420)
+        #self.create_goal(250, 300)
         self.finalize_level()
 
     def create_ennemies(self):
         self.create_octopus(450, 50)
         self.create_left_bird(250)
         self.create_right_bird(320)
+
+    def create_platforms(self):
+        platformsbuilder.level4_builder(self)
+
 
 
 LVLS = {0: Level0,
@@ -81,6 +93,7 @@ LVLS = {0: Level0,
         3: Level3,
         4: Level4,
         }
+
 
 
 class RandomLevel(BaseLevel):
@@ -95,9 +108,7 @@ class RandomLevel(BaseLevel):
         self.finalize_level()
 
     def create_platforms(self):
-        self.create_octopus_platform(250, 420)
-        goal = self.create_goal(250, 300)
-        goal.player_touch_required = self._game.won_levels
+        platformsbuilder.random_builder(self)
 
     def create_ennemies(self):
         for enn, qty in self._game.random_ennemies.items():

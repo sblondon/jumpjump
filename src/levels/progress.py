@@ -5,12 +5,12 @@ import random
 
 import pygame.display
 
+import core
 import engine
-
-from core import BaseLevel
 import platformsbuilder
 
-class Level0(BaseLevel):
+
+class Level0(core.BaseLevel):
     BACKGROUND_PATH = engine.background_path("wall.png")
 
     def create_ennemies(self):
@@ -20,7 +20,7 @@ class Level0(BaseLevel):
         platformsbuilder.platform0_builder(self)
 
 
-class Level1(BaseLevel):
+class Level1(core.BaseLevel):
     BACKGROUND_PATH = engine.background_path("bridge.png")
 
     def create_ennemies(self):
@@ -30,7 +30,7 @@ class Level1(BaseLevel):
         platformsbuilder.platform1_builder(self)
 
 
-class Level2(BaseLevel):
+class Level2(core.BaseLevel):
     BACKGROUND_PATH = engine.background_path("desert-1.png")
 
     def create_ennemies(self):
@@ -41,7 +41,7 @@ class Level2(BaseLevel):
         platformsbuilder.platform2_builder(self)
 
 
-class Level3(BaseLevel):
+class Level3(core.BaseLevel):
     BACKGROUND_PATH = engine.background_path("desert-2.png")
 
     def create_ennemies(self):
@@ -53,7 +53,7 @@ class Level3(BaseLevel):
         platformsbuilder.platform3_builder(self)
 
 
-class Level4(BaseLevel):
+class Level4(core.BaseLevel):
     BACKGROUND_PATH = engine.background_path("wall.png")
 
     def create_ennemies(self):
@@ -66,7 +66,7 @@ class Level4(BaseLevel):
 
 
 
-LVLS = {0: Level0,
+LEVELS = {0: Level0,
         1: Level1,
         2: Level2,
         3: Level3,
@@ -75,7 +75,7 @@ LVLS = {0: Level0,
 
 
 
-class RandomLevel(BaseLevel):
+class RandomLevel(core.BaseLevel):
     def __init__(self, game):
         backgrounds = os.listdir(engine.background_dir())
         background_filename = random.choice(backgrounds)

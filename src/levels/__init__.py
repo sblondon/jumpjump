@@ -6,9 +6,8 @@ import progress
 
 
 def select_level(game):
-    LVLS = progress.LVLS
-    _Level = LVLS.get(game.won_levels, progress.RandomLevel)
-    return _Level(game)
+    Level = progress.LEVELS.get(game.won_levels, progress.RandomLevel)
+    return Level(game)
 
 def introduce_level(game):
     msg = u"Level %d" % (game.won_levels + 1)

@@ -86,31 +86,45 @@ class RandomLevel(core.BaseLevel):
         platformsbuilder.random_builder(self)
 
     def create_ennemies(self):
-        for enn, qty in self.game.random_ennemies.items():
+        for ennemy_id, qty in self.game.random_ennemies.items():
             for i in range(qty):
-                self._create_ennemy(enn)
+                self._create_ennemy(ennemy_id)
 
-        enn = random.choice( self.game.random_ennemies.keys() )
-        self._create_ennemy(enn)
-        self.game.random_ennemies[enn] += 1
+        ennemy_id = random.choice( self.game.random_ennemies.keys() )
+        self._create_ennemy(ennemy_id)
+        self.game.random_ennemies[ennemy_id] += 1
 
-    def _create_ennemy(self, enn):
-       if enn == self.game.SLOW_FANTOM:
-           x = random.randint(0, self.screen.get_width() - 50)
-           y = random.randint(0, self.screen.get_height() - 200)
-           self.create_slow_fantom(x, y)
-       elif enn == self.game.FAST_FANTOM:
-           x = random.randint(0, self.screen.get_width() - 50)
-           y = random.randint(0, self.screen.get_height() - 150)
-           self.create_fast_fantom(x, y)
-       elif enn == self.game.OCTOPUS:
-           x = random.randint(0, self.screen.get_width() - 50)
-           y = random.randint(125, 375)
-           self.create_octopus(x, y)
-       elif enn == self.game.LEFT_BIRD:
-           y = random.randint(0, self.screen.get_height() - 100)
-           self.create_left_bird(y)
-       elif enn == self.game.RIGHT_BIRD:
-           y = random.randint(0, self.screen.get_height() - 100)
-           self.create_right_bird(y)
+    def _create_ennemy(self, ennemy_id):
+        ennemy_creator = {
+                self.game.SLOW_FANTOM: self._create_slow_fantom,
+                self.game.FAST_FANTOM: self._create_fast_fantom,
+                self.game.OCTOPUS: self._create_octopus,
+                self.game.LEFT_BIRD: self._create_left_bird,
+                self.game.RIGHT_BIRD: self._create_right_bird,
+
+                }
+        ennemy_creator[ennemy_id]()
+
+    def _create_slow_fantom(self):
+        x = random.randint(0, self.screen.get_width() - 50)
+        y = random.randint(0, self.screen.get_height() - 200)
+        self.create_slow_fantom(x, y)
+
+    def _create_fast_fantom(self):
+        x = random.randint(0, self.screen.get_width() - 50)
+        y = random.randint(0, self.screen.get_height() - 150)
+        self.create_fast_fantom(x, y)
+
+    def _create_octopus(self):
+        x = random.randint(0, self.screen.get_width() - 50)
+        y = random.randint(125, 375)
+        self.create_octopus(x, y)
+
+    def _create_left_bird(self):
+        y = random.randint(0, self.screen.get_height() - 100)
+        self.create_left_bird(y)
+
+    def _create_right_bird(self):
+        y = random.randint(0, self.screen.get_height() - 100)
+        self.create_right_bird(y)
 

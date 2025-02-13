@@ -5,9 +5,9 @@ import random
 
 import pygame.display
 
-import core
+from . import core
 import engine
-import platformsbuilder
+from . import platformsbuilder
 
 
 class Level0(core.BaseLevel):
@@ -90,7 +90,7 @@ class RandomLevel(core.BaseLevel):
             for i in range(qty):
                 self._create_ennemy(ennemy_id)
 
-        ennemy_id = random.choice( self.game.random_ennemies.keys() )
+        ennemy_id = random.choice(tuple(self.game.random_ennemies.keys()))
         self._create_ennemy(ennemy_id)
         self.game.random_ennemies[ennemy_id] += 1
 

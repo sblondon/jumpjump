@@ -2,8 +2,8 @@
 
 import engine
 
-from core import BaseLevel
-from progress import RandomLevel
+from .core import BaseLevel
+from .progress import RandomLevel
 
 
 class TestLevel(RandomLevel):

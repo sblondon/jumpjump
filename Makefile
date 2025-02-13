@@ -1,6 +1,6 @@
 
 debian:
-	sudo apt-get install make python-pygame
+	sudo apt-get install make python3-pygame
 
 run:
 	sh ./src/run.sh

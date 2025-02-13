@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import development
+from . import development
 import engine
-import progress    
+from . import progress    
 
 
 def select_level(game):

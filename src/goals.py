@@ -11,7 +11,7 @@ class Goal(pygame.sprite.Sprite):
     def __init__(self, x, y, level, teleport=False):
         super(Goal, self).__init__()
         self._IMAGES = {"blue": engine.image_path("goal-blue.png"), "red": engine.image_path("goal-red.png")}
-        self._current_color = random.choice(self._IMAGES.keys())
+        self._current_color = random.choice(tuple(self._IMAGES.keys()))
         self.image = self._set_image()
         self.rect = self.image.get_rect().move(x, y)
         self._player_touch_done = 0

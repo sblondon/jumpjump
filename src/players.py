@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import pygame.display
 import pygame.image
 import pygame.sprite

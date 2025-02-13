@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from . import development
 import engine
 from . import progress    

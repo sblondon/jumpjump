@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 class Game(object):
     QUIT = "Quit"
     WIN = "Win"

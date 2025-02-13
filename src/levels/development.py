@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import engine
 
 from .core import BaseLevel

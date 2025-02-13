@@ -10,7 +10,7 @@ def select_level(game):
     return Level(game)
 
 def introduce_level(game):
-    msg = u"Level %d" % (game.won_levels + 1)
+    msg = "Level %d" % (game.won_levels + 1)
     engine.display_simple_message(msg)
 
 def select_testlevel(game):

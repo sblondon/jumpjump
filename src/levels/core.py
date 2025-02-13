@@ -28,7 +28,7 @@ class BaseLevel(object):
 
         self.background = pygame.image.load(self.BACKGROUND_PATH).convert()
         TEXT_COLOR = (200, 0, 0)
-        hearts = u"♥" * game.lives
+        hearts = "♥" * game.lives
         text = engine.build_message(hearts, TEXT_COLOR)
         textpos = text.get_rect(
                 centerx=self.background.get_width()/2,

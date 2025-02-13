@@ -8,7 +8,7 @@ def display_lose_level():
 
 def display_lose_game(game):
     won_levels = game.won_levels
-    template = "Game over (won: %d level)" if won_levels == 1 else "Game over (won: %d levels)"
-    message = template % won_levels
+    plural_mark = "" if won_levels == 1 else "s"
+    message = f"Game over (won: {won_levels} level{plural_mark})"
     engine.display_simple_message(message)
 

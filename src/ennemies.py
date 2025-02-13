@@ -126,7 +126,7 @@ class Ink(pygame.sprite.Sprite):
                 self.kill()
 
     def _image_filename(self):
-        return "ink-%d.png" % self.image_step
+        return f"ink-{self.image_step}.png"
 
     def _set_image(self):
         return pygame.image.load(

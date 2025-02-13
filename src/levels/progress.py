@@ -3,8 +3,8 @@ import random
 
 import pygame.display
 
-from . import core
 import engine
+from . import core
 from . import platformsbuilder
 
 
